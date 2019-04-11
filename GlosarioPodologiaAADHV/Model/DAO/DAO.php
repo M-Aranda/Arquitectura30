@@ -4,11 +4,11 @@
  *
  * @author Cheloz
  */
- interface DAO  {
+ interface DAO {
     
-    public function create($param);
+    public function create(Object $param);
     public function read();
-    public function update($param);
-    public function delete($param);
+    public function update(Object $param);
+    public function delete(Object $param);
 
 }

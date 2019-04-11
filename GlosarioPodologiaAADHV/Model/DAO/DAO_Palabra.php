@@ -1,4 +1,6 @@
 <?php
+require_once("DAO.php");
+require_once("..Model/Conexion.php");
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,31 +15,43 @@
  */
 class DAO_Palabra extends Conexion implements DAO{
     //put your code here
-    public function create(Palabra $palabra) {
+    
+    public function __construct() {
+        parent::__construct();
+    }
+
+   
+    
+    
+    
+    
+    public function create(Object $palabra) {
         
     }
 
-    public function delete($id) {
+    public function delete(Object $id) {
         
     }
 
     public function read() {
-        $lista = array();
+        
         $this->c->conectar();
-        $select = "SELECT * FROM Palabra;";
-        $rs = $this->c->ejecutar($select);
-        while($obj = $rs->fetch_object()){
-            $palabra = new Palabra();
-            $palabra->setId($obj->id_tipo_vehiculo);
-            $palabra->setNombre($obj->nombre_tipo_vehiculo);
-            array_push($lista,$palabra);
-        }
-        $this->c->desconectar();
-        return $lista;
+        $query="SELECT * FROM Palabra;";
+        $listado= array();
+        $rs = $this->c->ejecutar($query);
+        while($reg = $rs->fetch_array()){
+             $obj= new Palabra();
+             $obj->setId($reg[0]);
+             $obj->setNombre($reg[1]);
+
+             $listado[]=$info;
+         }
+         $this->c->desconectar();
+         return $listado;
         
     }
 
-    public function update(Palabra $palabra) {
+    public function update(Object $palabra) {
         
     }
 

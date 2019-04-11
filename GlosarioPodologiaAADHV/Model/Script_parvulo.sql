@@ -1,6 +1,6 @@
-CREATE DATABASE bd_podologia;
+CREATE DATABASE bd_parvulo;
 
-USE bd_podologia;
+USE bd_parvulo;
 
 CREATE TABLE Usuario(
 id INT AUTO_INCREMENT,
@@ -57,5 +57,5 @@ INSERT INTO Ejemplo VALUES(NULL,'Algun ejemplo cualquiera','alguna url',1);
 
 
 /*
-DROP DATABASE bd_podologia;
+DROP DATABASE bd_parvulo;
 */
