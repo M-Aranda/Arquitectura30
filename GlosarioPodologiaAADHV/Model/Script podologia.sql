@@ -1,16 +1,39 @@
-CREATE DATABASE bd_glosario_podologia;
+CREATE DATABASE bd_podologia;
 
-USE bd_glosario_podologia;
+USE bd_podologia;
+
+CREATE TABLE Usuario(
+id INT AUTO_INCREMENT,
+nombre VARCHAR (100),
+esProfesor BOOLEAN,
+rut  VARCHAR (13) UNIQUE,
+contrasenia VARCHAR (16),
+correo VARCHAR (50),
+PRIMARY KEY(id)
+);
+
+CREATE TABLE Asignatura(
+id INT AUTO_INCREMENT,
+nombre VARCHAR (30),
+codigo VARCHAR (30),
+fk_usuario  INT,
+FOREIGN KEY (fk_usuario) REFERENCES Usuario(id),
+PRIMARY KEY(id)
+);
 
 CREATE TABLE Palabra(
 id INT AUTO_INCREMENT,
 nombre VARCHAR (100),
+sigla VARCHAR (50),
+fk_asignatura INT,
+FOREIGN KEY (fk_asignatura) REFERENCES Asignatura (id),
 PRIMARY KEY(id)
 );
 
 CREATE TABLE Significado(
 id INT AUTO_INCREMENT,
-definicion VARCHAR (100),
+descripcion VARCHAR (100),
+definicionRecomendada BOOLEAN,
 fk_palabra INT,
 FOREIGN KEY (fk_palabra) REFERENCES palabra (id),
 PRIMARY KEY(id)
@@ -18,18 +41,21 @@ PRIMARY KEY(id)
 
 CREATE TABLE Ejemplo(
 id INT AUTO_INCREMENT,
-descripcionEj VARCHAR (100),
-fk_palabra INT,
-FOREIGN KEY (fk_palabra) REFERENCES palabra (id),
+fraseExplicativa VARCHAR (100),
+url_imagen VARCHAR (200),
+fk_significado INT,
+FOREIGN KEY (fk_significado) REFERENCES Significado (id),
 PRIMARY KEY(id)
 );
 
-INSERT INTO Palabra VALUES(NULL,'Algo');
-INSERT INTO Significado VALUES(NULL,'Alguna definicion cualquiera',1);
-INSERT INTO Ejemplo VALUES(NULL,'Algun ejemplo cualquiera',1);
+INSERT INTO Usuario VALUES(NULL,'Algun usuario',0,'Alguien','pass','alguien@hotmail.com');
+INSERT INTO Asignatura VALUES(NULL,'Alguna asignatura','algun codigo', 1);
+INSERT INTO Palabra VALUES(NULL,'Algo','Alguna sigla',1);
+INSERT INTO Significado VALUES(NULL,'Alguna definicion cualquiera',0,1);
+INSERT INTO Ejemplo VALUES(NULL,'Algun ejemplo cualquiera','alguna url',1);
 
 
 
 /*
-DROP DATABASE bd_glosario_podologia;
+DROP DATABASE bd_podologia;
 */
