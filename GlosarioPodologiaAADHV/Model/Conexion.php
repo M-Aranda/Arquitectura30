@@ -9,7 +9,7 @@ class Conexion {
     
     public function __construct() {//puede que haya que cambiar los parametros de conexion (invertir el orden, online en !ONLINE y offline en ONLINE)
         if (!ONLINE) {
-            $this->bdName = "bd_podologia";
+            $this->bdName = "bd_parvulo";
             $this->user = "root";
             $this->pass = "";
         }else{

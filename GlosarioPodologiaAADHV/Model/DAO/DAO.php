@@ -6,9 +6,9 @@
  */
  interface DAO {
     
-    public function create(Object $param);
+    public function create($objeto);
     public function read();
-    public function update(Object $param);
-    public function delete(Object $param);
+    public function update($objeto);
+    public function delete($objeto);
 
-}
+ }

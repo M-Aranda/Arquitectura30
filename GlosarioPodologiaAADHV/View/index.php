@@ -7,14 +7,25 @@
     </head>
     <body>
         <?php
-        require_once("../Model/DAO/DAO_Palabra.php");
-        echo "Las palabras son:";   
-        $dp= new DAO_Palabra();
-        foreach ($dp as $p) {?>
-            
-        <h1><?php echo $p->read()->getNombre(); ?></h1>
-       <?php }
+        require_once("../Model/DAO/DAO_Usuario.php");
         
+
+        
+        
+        echo "Los usuarios son:";   
+        $du= new DAO_Usuario();
+        $usuarios=$du->read();
+        foreach ($usuarios as $u) {?>
+            
+        <h3><?php echo $u->getNombre(); ?></h3>
+       <?php }
+       
+        $u= new Usuario();
+        $u->setNombre("PULL MY DEVIL TRIGGER");
+        $du->create2($u);
+       
+        
+       
         ?>
     </body>
 </html>

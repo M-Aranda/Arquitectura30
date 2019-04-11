@@ -48,11 +48,14 @@ FOREIGN KEY (fk_significado) REFERENCES Significado (id),
 PRIMARY KEY(id)
 );
 
-INSERT INTO Usuario VALUES(NULL,'Algun usuario',0,'Alguien','pass','alguien@hotmail.com');
+INSERT INTO Usuario VALUES(NULL,'Algun usuario',0,'1','pass','alguien@hotmail.com');
 INSERT INTO Asignatura VALUES(NULL,'Alguna asignatura','algun codigo', 1);
 INSERT INTO Palabra VALUES(NULL,'Algo','Alguna sigla',1);
 INSERT INTO Significado VALUES(NULL,'Alguna definicion cualquiera',0,1);
 INSERT INTO Ejemplo VALUES(NULL,'Algun ejemplo cualquiera','alguna url',1);
+
+
+
 
 
 
