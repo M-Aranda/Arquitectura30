@@ -8,9 +8,7 @@
     <body>
         <?php
         require_once("../Model/DAO/DAO_Usuario.php");
-        
-
-        
+       
         
         echo "Los usuarios son:";   
         $du= new DAO_Usuario();
@@ -18,12 +16,21 @@
         foreach ($usuarios as $u) {?>
             
         <h3><?php echo $u->getNombre(); ?></h3>
+       
        <?php }
        
+       /*
         $u= new Usuario();
-        $u->setNombre("PULL MY DEVIL TRIGGER");
-        $du->create2($u);
+        $u->setId(16);
+        $u->setNombre("ahaahhahahah");
+        $u->setEsProfesor(TRUE);
+        $u->setContrasenia("YOURTOOLATE");
+        $u->setCorreo("AHHAHAHA");
+        $u->setRut("lolol");
+        //$du->create($u);
        
+       $du->update($u);
+         */
         
        
         ?>

@@ -8,32 +8,27 @@ class DAO_Usuario extends Conexion implements DAO {
     
     private $c;
     
-    
     public function __construct() {
         $this->c = new Conexion(
         "bd_parvulo",
         "root",
         "");
     }
-    
-    
-     public function create2(Usuario $objeto) {
-      $query="INSERT INTO Usuario (nombre) VALUES ('".$objeto->getNombre()."');";
-      $this->c->conectar();
-      $this->c->ejecutar($query);
-      $this->c->desconectar();   
-    }
-    
+   
+  
  
-    public function create( $objeto) {
-      $query="INSERT INTO Usuario (nombre) VALUES ('".$objeto->getNombre()."');";
+    public function create($objeto) {
+      $query="INSERT INTO Usuario VALUES (NULL, '".$objeto->getNombre()."', ".$objeto->getEsProfesor().",  '".$objeto->getRut()."'"
+              . ", '".$objeto->getContrasenia()."', '".$objeto->getCorreo()."'   );"; 
+     
       $this->c->conectar();
       $this->c->ejecutar($query);
       $this->c->desconectar();   
     }
 
     public function delete($id) {
-      $query="DELETE FROM  Usuario WHERE id=".$id." );";
+      $query="DELETE FROM  Usuario WHERE id=".$id.";";
+      echo $query;
       $this->c->conectar();
       $this->c->ejecutar($query);
       $this->c->desconectar();
@@ -64,8 +59,13 @@ class DAO_Usuario extends Conexion implements DAO {
         
     }
 
-    public function update( $objeto) {
-        
+    public function update($objeto) {
+              $query=" UPDATE Usuario SET  nombre='".$objeto->getNombre()."', esProfesor= ".$objeto->getEsProfesor().",  rut= '".$objeto->getRut()."'"
+              . ", contrasenia='".$objeto->getContrasenia()."', correo='".$objeto->getCorreo()."' WHERE id=".$objeto->getId()."   ;"; 
+     
+      $this->c->conectar();
+      $this->c->ejecutar($query);
+      $this->c->desconectar();   
     }
 
 }

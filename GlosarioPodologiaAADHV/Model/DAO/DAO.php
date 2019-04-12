@@ -4,7 +4,7 @@
  *
  * @author Cheloz
  */
- interface DAO {
+ interface DAO  {
     
     public function create($objeto);
     public function read();

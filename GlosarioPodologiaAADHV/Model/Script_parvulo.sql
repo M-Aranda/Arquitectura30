@@ -55,7 +55,9 @@ INSERT INTO Significado VALUES(NULL,'Alguna definicion cualquiera',0,1);
 INSERT INTO Ejemplo VALUES(NULL,'Algun ejemplo cualquiera','alguna url',1);
 
 
-
+/*
+SELECT * FROM Usuario;
+*/
 
 
 
