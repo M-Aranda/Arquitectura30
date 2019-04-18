@@ -68,4 +68,49 @@ class DAO_Usuario extends Conexion implements DAO {
       $this->c->desconectar();   
     }
 
+    public function validacionLogin($rut){
+        $this->c->conectar();
+        $query = "SELECT * FROM Usuario WHERE rut = '$rut'";
+        $rs = $this->c->ejecutar($query);
+
+        $usuario = null;
+
+        if ($reg = $rs->fetch_array()) {
+            $usuario = new Usuario($reg[0], $reg[1], $reg[2], $reg[3],$reg[4], $reg[5]);
+        }
+
+        $this->c->desconectar();
+        return $usuario;
+    }
+
+    public function readLogin($rut) {
+      $this->c->conectar();
+
+      $query = "SELECT * FROM Usuario WHERE rut = '$rut'";
+
+      $listaUsuario= array();
+
+      $rs = $this->c->ejecutar($query);
+
+      while($reg = $rs->fetch_array()){
+
+           $usuario = new Usuario();
+
+           $usuario->setId($reg[0]);
+           $usuario->setNombre($reg[1]);
+           $usuario->setEsProfesor($reg[2]);
+           $usuario->setRut($reg[3]);
+           $usuario->setContrasenia($reg[4]);
+           $usuario->setCorreo($reg[5]);
+           
+           $listaUsuario[]=$usuario;
+       }
+
+       $this->c->desconectar();
+       return $listaUsuario;
+      
+      
+      
+      
+  }
 }
