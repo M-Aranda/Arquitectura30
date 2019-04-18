@@ -62,4 +62,20 @@ class DAO_Asignatura extends Conexion implements DAO {
         $this->c->desconectar();
     }
 
+    
+        public function findById($id) {
+        $this->c->conectar();
+        $query = "SELECT * FROM Asignatura WHERE id= ".$id.";";
+        
+        $rs = $this->c->ejecutar($query);
+        while ($reg = $rs->fetch_array()) {
+            $obj = new Asignatura();
+            $obj->setId($reg[0]);
+            $obj->setNombre($reg[1]);
+            $obj->setCodigo($reg[2]);
+        }
+        $this->c->desconectar();
+        return $obj;
+    }
+    
 }

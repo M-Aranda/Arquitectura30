@@ -110,7 +110,26 @@ class DAO_Usuario extends Conexion implements DAO {
        return $listaUsuario;
       
       
-      
-      
   }
+  
+  
+      
+    public function findById($id){
+        $this->c->conectar();
+        $query="SELECT * FROM Usuario WHERE id=".$id." ;";
+        $rs = $this->c->ejecutar($query);
+        while($reg = $rs->fetch_array()){
+             $obj= new Usuario();
+             $obj->setId($reg[0]);
+             $obj->setNombre($reg[1]);
+             $obj->setEsProfesor($reg[2]);
+             $obj->setRut($reg[3]);
+             $obj->setContrasenia($reg[4]);
+             $obj->setCorreo($reg[5]);
+             
+         }
+         $this->c->desconectar();
+         return $obj;
+        
+    }
 }
