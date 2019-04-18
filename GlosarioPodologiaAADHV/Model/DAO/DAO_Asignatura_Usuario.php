@@ -26,7 +26,7 @@ class DAO_Asignatura_Usuario extends Conexion implements DAO{
     
     
     
-public function create($objeto) {
+    public function create($objeto) {
       $query="INSERT INTO Asignatura_Usuario VALUES (NULL, '".$objeto->getUsuario()->getId()."', ".$objeto->getAsignatura()->getId()." );";
      
       $this->c->conectar();

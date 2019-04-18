@@ -13,37 +13,48 @@
  */
 class Significado {
     private $id;
-    private $definicion;
-    private $palabra;
+    private $descripcion;
+    private $definicionRecomendada;
+    private $palabra_asignatura;
     
     public function __construct() {
         
     }
-    
+
     public function getId() {
         return $this->id;
     }
 
-    public function getDefinicion() {
-        return $this->definicion;
+    public function getDescripcion() {
+        return $this->descripcion;
     }
 
-    public function getPalabra() {
-        return $this->palabra;
+    public function getDefinicionRecomendada() {
+        return $this->definicionRecomendada;
+    }
+
+    public function getPalabra_asignatura() {
+        return $this->palabra_asignatura;
     }
 
     public function setId($id) {
         $this->id = $id;
     }
 
-    public function setDefinicion($definicion) {
-        $this->definicion = $definicion;
+    public function setDescripcion($descripcion) {
+        $this->descripcion = $descripcion;
     }
 
-   public  function setPalabra($palabra) {
-        $this->palabra = $palabra;
+    public function setDefinicionRecomendada($definicionRecomendada) {
+        $this->definicionRecomendada = $definicionRecomendada;
     }
 
+    public function setPalabra_asignatura($palabra_asignatura) {
+        $this->palabra_asignatura = $palabra_asignatura;
+    }
+
+
+   
 
 
 }

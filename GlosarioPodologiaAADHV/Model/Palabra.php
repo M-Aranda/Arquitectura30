@@ -14,7 +14,9 @@
 class Palabra {
     private $id;
     private $nombre;
-    
+    private $sigla;
+
+        
     public function __construct() {
         
     }
@@ -35,7 +37,13 @@ class Palabra {
         $this->nombre = $nombre;
     }
 
+    public function getSigla() {
+        return $this->sigla;
+    }
 
+    public function setSigla($sigla) {
+        $this->sigla = $sigla;
+    }
     
     
     

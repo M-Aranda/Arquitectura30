@@ -13,8 +13,10 @@
  */
 class Ejemplo {
     private $id;
-    private $DescripcionEj;
-    private $palabra;
+    private $fraseExplicativa;
+    private $url_imagen;
+    private $significado;
+    
     
     public function __construct() {
         
@@ -24,24 +26,32 @@ class Ejemplo {
         return $this->id;
     }
 
-    public function getDescripcionEj() {
-        return $this->DescripcionEj;
+    public function getFraseExplicativa() {
+        return $this->fraseExplicativa;
     }
 
-    public function getPalabra() {
-        return $this->palabra;
+    public function getUrl_imagen() {
+        return $this->url_imagen;
+    }
+
+    public function getSignificado() {
+        return $this->significado;
     }
 
     public function setId($id) {
         $this->id = $id;
     }
 
-    public function setDescripcionEj($DescripcionEj) {
-        $this->DescripcionEj = $DescripcionEj;
+    public function setFraseExplicativa($fraseExplicativa) {
+        $this->fraseExplicativa = $fraseExplicativa;
     }
 
-    public function setPalabra($palabra) {
-        $this->palabra = $palabra;
+    public function setUrl_imagen($url_imagen) {
+        $this->url_imagen = $url_imagen;
+    }
+
+    public function setSignificado($significado) {
+        $this->significado = $significado;
     }
 
 

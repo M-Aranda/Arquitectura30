@@ -1,6 +1,7 @@
 <?php
 require_once("DAO.php");
 require_once("..Model/Conexion.php");
+require_once("..Model/Palabra.php");
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,16 +21,24 @@ class DAO_Palabra extends Conexion implements DAO{
         parent::__construct();
     }
 
-   
+ 
     
     
-    
-    
-    public function create(Object $palabra) {
+    public function create($palabra) {
+      $query="INSERT INTO Palabra VALUES (NULL, '".$objeto->getNombre()."', ".$objeto->getSigla()." );"; 
+     
+      $this->c->conectar();
+      $this->c->ejecutar($query);
+      $this->c->desconectar();  
         
     }
 
-    public function delete(Object $id) {
+    public function delete($id) {
+      $query="DELETE FROM Palabra WHERE id=".$id." ;"; 
+     
+      $this->c->conectar();
+      $this->c->ejecutar($query);
+      $this->c->desconectar();  
         
     }
 
@@ -43,16 +52,37 @@ class DAO_Palabra extends Conexion implements DAO{
              $obj= new Palabra();
              $obj->setId($reg[0]);
              $obj->setNombre($reg[1]);
+             $obj->setSigla($reg[2]);
 
-             $listado[]=$info;
+             $listado[]=$obj;
          }
          $this->c->desconectar();
          return $listado;
         
     }
 
-    public function update(Object $palabra) {
+    public function update($palabra) {
+      $query="UPDATE Palabra SET nombre='".$objeto->getNombre()."', sigla=".$objeto->getSigla()." WHERE id=".$palabra->getId().";"; 
+     
+      $this->c->conectar();
+      $this->c->ejecutar($query);
+      $this->c->desconectar();  
+    }
+    
         
+        public function findById($id) {
+        $this->c->conectar();
+        $query = "SELECT * FROM Palabra WHERE id= ".$id.";";
+        
+        $rs = $this->c->ejecutar($query);
+        while ($reg = $rs->fetch_array()) {
+            $obj = new Palabra();
+            $obj->setId($reg[0]);
+            $obj->setNombre($reg[1]);
+            $obj->setSigla($reg[2]);
+        }
+        $this->c->desconectar();
+        return $obj;
     }
 
 }
