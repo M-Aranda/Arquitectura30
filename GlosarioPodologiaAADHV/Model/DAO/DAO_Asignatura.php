@@ -15,7 +15,7 @@ class DAO_Asignatura extends Conexion implements DAO {
         $this->c = new Conexion(
                 "bd_parvulo",
                 "root",
-                "");
+                "123456789");
     }
 
     public function create($objeto) {
