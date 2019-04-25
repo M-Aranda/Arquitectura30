@@ -6,8 +6,8 @@ require_once("../Model/Asignatura_Usuario.php");
 
 require_once("../Model/Usuario.php");
 require_once("../Model/Asignatura.php");
-require_once("../Model/DAO_Usuario.php");
-require_once("../Model/DAO_Asignatura.php");
+require_once("../Model/DAO/DAO_Usuario.php");
+require_once("../Model/DAO/DAO_Asignatura.php");
 /**
  * Description of DAO_Asignatura_Usuario
  *

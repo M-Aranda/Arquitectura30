@@ -5,7 +5,7 @@ require_once("../Model/Conexion.php");
 require_once("../Model/Significado.php");
 
 require_once("../Model/Palabra_Asignatura.php");
-require_once("../Model/DAO_Palabra_Asignatura.php");
+require_once("../Model/DAO/DAO_Palabra_Asignatura.php");
 
 
 /**
@@ -48,7 +48,7 @@ class DAO_Significado extends Conexion implements DAO {
         $listado= array();
         $rs = $this->c->ejecutar($query);
         while($reg = $rs->fetch_array()){
-             $obj= new Usuario();
+             $obj= new Significado();
              $obj->setId($reg[0]);
              $obj->setDescripcion($reg[1]);
              $obj->setDefinicionRecomendada($reg[2]);
@@ -63,8 +63,9 @@ class DAO_Significado extends Conexion implements DAO {
     }
 
     public function update($objeto) {
-    $query="UPDATE Significado SET  '".$objeto->getDescripcion()."', ".$objeto->getDefinicionRecomendada().",  ".$objeto->getPalabra_asignatura()->getId()." WHERE id="
+    $query="UPDATE Significado SET descripcion= '".$objeto->getDescripcion()."', definicionRecomendada=".$objeto->getDefinicionRecomendada().", fk_palabra_asignatura= ".$objeto->getPalabra_asignatura()->getId()." WHERE id="
             . " ".$objeto->getId().";"; 
+
      
       $this->c->conectar();
       $this->c->ejecutar($query);
@@ -80,11 +81,13 @@ class DAO_Significado extends Conexion implements DAO {
         $query="SELECT * FROM Significado WHERE id=".$id." ;";
         $rs = $this->c->ejecutar($query);
         while($reg = $rs->fetch_array()){
-             $obj= new Usuario();
+             $obj= new Significado();
              $obj->setId($reg[0]);
              $obj->setDescripcion($reg[1]);
              $obj->setDefinicionRecomendada($reg[2]);
-             $obj->setPalabra_asignatura($reg[3]);
+             
+             $dpa= new DAO_Palabra_Asignatura();
+             $obj->setPalabra_asignatura($dpa->findById($reg[3]));
 
              
          }

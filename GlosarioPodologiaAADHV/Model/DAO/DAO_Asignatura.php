@@ -15,7 +15,7 @@ class DAO_Asignatura extends Conexion implements DAO {
         $this->c = new Conexion(
                 "bd_parvulo",
                 "root",
-                "123456789");
+                "");
     }
 
     public function create($objeto) {
@@ -53,9 +53,11 @@ class DAO_Asignatura extends Conexion implements DAO {
 
     public function update($objeto) {
         $query="UPDATE Asignatura SET "
-                . "nombre='".$objeto->getNombre()."','"
+                . "nombre='".$objeto->getNombre()."',"
                 . "codigo=".$objeto->getCodigo()
                 . " WHERE id=".$objeto->getId().";";
+        
+        
         
         $this->c->conectar();
         $this->c->ejecutar($query);

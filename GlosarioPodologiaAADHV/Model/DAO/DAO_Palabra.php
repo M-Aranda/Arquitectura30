@@ -1,7 +1,7 @@
 <?php
 require_once("DAO.php");
-require_once("..Model/Conexion.php");
-require_once("..Model/Palabra.php");
+require_once("../Model/Conexion.php");
+require_once("../Model/Palabra.php");
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,18 +15,23 @@ require_once("..Model/Palabra.php");
  * @author Cheloz
  */
 class DAO_Palabra extends Conexion implements DAO{
-    //put your code here
+
+
+    private $c;
     
     public function __construct() {
-        parent::__construct();
+        $this->c = new Conexion(
+        "bd_parvulo",
+        "root",
+        "");
     }
-
  
     
     
-    public function create($palabra) {
-      $query="INSERT INTO Palabra VALUES (NULL, '".$objeto->getNombre()."', ".$objeto->getSigla()." );"; 
+    public function create($objeto) {
+      $query="INSERT INTO Palabra VALUES (NULL, '".$objeto->getNombre()."', '".$objeto->getSigla()."' );"; 
      
+ 
       $this->c->conectar();
       $this->c->ejecutar($query);
       $this->c->desconectar();  
@@ -61,8 +66,8 @@ class DAO_Palabra extends Conexion implements DAO{
         
     }
 
-    public function update($palabra) {
-      $query="UPDATE Palabra SET nombre='".$objeto->getNombre()."', sigla=".$objeto->getSigla()." WHERE id=".$palabra->getId().";"; 
+    public function update($objeto) {
+      $query="UPDATE Palabra SET nombre='".$objeto->getNombre()."', sigla='".$objeto->getSigla()."' WHERE id=".$objeto->getId().";"; 
      
       $this->c->conectar();
       $this->c->ejecutar($query);

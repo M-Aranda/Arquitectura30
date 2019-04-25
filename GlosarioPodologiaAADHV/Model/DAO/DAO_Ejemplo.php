@@ -24,8 +24,9 @@ class DAO_Ejemplo extends Conexion implements DAO{
     }
     
  public function create($objeto) {
-      $query="INSERT INTO Ejemplo VALUES (NULL, '".$objeto->getFraseExplicativa()."', ".$objeto->getUrl_imagen().",  '".$objeto->getSignificado()."');"; 
+      $query="INSERT INTO Ejemplo VALUES (NULL, '".$objeto->getFraseExplicativa()."', '".$objeto->getUrl_imagen()."',  ".$objeto->getSignificado()->getId().");"; 
      
+    
       $this->c->conectar();
       $this->c->ejecutar($query);
       $this->c->desconectar();   
@@ -33,7 +34,7 @@ class DAO_Ejemplo extends Conexion implements DAO{
 
     public function delete($id) {
       $query="DELETE FROM  Ejemplo WHERE id=".$id.";";
-      echo $query;
+      
       $this->c->conectar();
       $this->c->ejecutar($query);
       $this->c->desconectar();
@@ -41,16 +42,16 @@ class DAO_Ejemplo extends Conexion implements DAO{
 
     public function read() {
         $this->c->conectar();
-        $query="SELECT * FROM Significado ;";
+        $query="SELECT * FROM Ejemplo ;";
         $listado= array();
         $rs = $this->c->ejecutar($query);
         while($reg = $rs->fetch_array()){
-             $obj= new Usuario();
+             $obj= new Ejemplo();
              $obj->setId($reg[0]);
-             $obj->setDescripcion($reg[1]);
-             $obj->setDefinicionRecomendada($reg[2]);
-             $dap= new DAO_Palabra_Asignatura();
-             $obj->setPalabra_asignatura($dap->findById($reg[3]));
+             $obj->setFraseExplicativa($reg[1]);
+             $obj->setUrl_imagen($reg[2]);
+             $das= new DAO_Significado();
+             $obj->setSignificado($das->findById($reg[3]));
 
              $listado[]=$obj;
          }
@@ -60,8 +61,9 @@ class DAO_Ejemplo extends Conexion implements DAO{
     }
 
     public function update($objeto) {
-    $query="UPDATE Ejemplo SET fraseExplicativa= '".$objeto->getFraseExplicativa()."', url_imagen= ".$objeto->getUrl_imagen().", fk_significado= ".$objeto->getSignificado()->getId()." WHERE id=".$objeto->getId()." );";
+    $query="UPDATE Ejemplo SET fraseExplicativa= '".$objeto->getFraseExplicativa()."', url_imagen= '".$objeto->getUrl_imagen()."', fk_significado= ".$objeto->getSignificado()->getId()." WHERE id=".$objeto->getId()." ;";
      
+   
       $this->c->conectar();
       $this->c->ejecutar($query);
       $this->c->desconectar();   
@@ -73,14 +75,17 @@ class DAO_Ejemplo extends Conexion implements DAO{
       
     public function findById($id){
         $this->c->conectar();
-        $query="SELECT * FROM Significado WHERE id=".$id." ;";
+        $query="SELECT * FROM Ejemplo WHERE id=".$id." ;";
         $rs = $this->c->ejecutar($query);
         while($reg = $rs->fetch_array()){
-             $obj= new Usuario();
+             $obj= new Ejemplo();
              $obj->setId($reg[0]);
-             $obj->setDescripcion($reg[1]);
-             $obj->setDefinicionRecomendada($reg[2]);
-             $obj->setPalabra_asignatura($reg[3]);
+             $obj->setFraseExplicativa($reg[1]);
+             $obj->setUrl_imagen($reg[2]);   
+             $das= new DAO_Significado();
+             $obj->setSignificado($das->findById($reg[3]));
+             
+
 
              
          }

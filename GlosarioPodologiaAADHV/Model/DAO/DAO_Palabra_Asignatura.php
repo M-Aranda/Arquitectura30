@@ -6,8 +6,8 @@ require_once("../Model/Palabra_Asignatura.php");
 
 require_once("../Model/Palabra.php");
 require_once("../Model/Asignatura.php");
-require_once("../Model/DAO_Palabra.php");
-require_once("../Model/DAO_Asignatura.php");
+require_once("../Model/DAO/DAO_Palabra.php");
+require_once("../Model/DAO/DAO_Asignatura.php");
 
 /**
  * Description of DAO_Asignatura_Palabra
@@ -36,6 +36,7 @@ class DAO_Palabra_Asignatura extends Conexion implements DAO {
 
     public function delete($id) {
       $query="DELETE FROM  Palabra_Asignatura WHERE id=".$id.";";
+      
      
       $this->c->conectar();
       $this->c->ejecutar($query);
@@ -48,7 +49,7 @@ class DAO_Palabra_Asignatura extends Conexion implements DAO {
         $listado= array();
         $rs = $this->c->ejecutar($query);
         while($reg = $rs->fetch_array()){
-             $obj= new Asignatura_Usuario();
+             $obj= new Palabra_Asignatura();
              $obj->setId($reg[0]);
              
              $dp= new DAO_Palabra();
@@ -68,8 +69,9 @@ class DAO_Palabra_Asignatura extends Conexion implements DAO {
     }
 
     public function update($objeto) {
-      $query="UPDATE Palabra_Asignatura SET fk_palabra= '".$objeto->getPalabra()->getId()."', fk_asignatura=".$objeto->getAsignatura()->getId()." "
-              . "WHERE id=".$objeto->getId()." );";
+      $query="UPDATE Palabra_Asignatura SET fk_palabra= ".$objeto->getPalabra()->getId().", fk_asignatura=".$objeto->getAsignatura()->getId()." "
+              . "WHERE id=".$objeto->getId()." ;";
+      echo $query;
      
       $this->c->conectar();
       $this->c->ejecutar($query);
@@ -82,7 +84,7 @@ class DAO_Palabra_Asignatura extends Conexion implements DAO {
       
         $rs = $this->c->ejecutar($query);
         while($reg = $rs->fetch_array()){
-             $obj= new Asignatura_Usuario();
+             $obj= new Palabra_Asignatura();
              $obj->setId($reg[0]);
              
              $dp= new DAO_Palabra();
@@ -97,6 +99,8 @@ class DAO_Palabra_Asignatura extends Conexion implements DAO {
          return $obj;
         
     }
+    
+    
     
 
 }
