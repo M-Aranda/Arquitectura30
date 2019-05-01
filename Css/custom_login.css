@@ -1,0 +1,17 @@
+body {
+	background: #FFF0DF;
+	color: #800000;
+	font-family: sans-serif;
+	font-size: 13px;
+	background-image: url("../Res/background_login.jpg");
+	background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.vertical-center {
+	min-height: 100%;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+}

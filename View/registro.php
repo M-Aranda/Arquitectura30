@@ -4,41 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Inicio de Sesión</title>
+    <title>Registro de Usuarios</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="Css/custom_login.css">
-    <link rel="shortcut icon" href="favicon.ico">
-	<link rel="icon" sizes="16x16 32x32 64x64" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../Css/custom_login.css">
+    <link rel="shortcut icon" href="../favicon.ico">
+	<link rel="icon" sizes="16x16 32x32 64x64" href="../favicon.ico">
 </head>
 <body>
 
 	<br>
 	<br>
 
-	<!-- Prueba de posicionamiento de imágen -->
     <div class="container">
-        <center><img src="Res/p.jpg" alt="" class="img-fluid" style="width: 20%;"></center>
+        <a href="../index.php"><center><img src="../Res/s.jpg" alt="" class="img-fluid" style="width: 15%;"></center></a>
     </div>
 
-	<br>
-	<br>
+    <br>
+    <br>
 
     <div class="container bg-white text-dark rounded">
-            <form action="Controller/CheckLogin.php" method="post">
+            <form action="../controller/CrearUsuario.php" method="post">
                 <div class="form-group">
                     <br>
+                    <label for="usuario">Nombre:</label>
+                    <input class="form-control" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre" autocomplete="off" required>
+                </div>
+
+                <div class="form-group">
                     <label for="usuario">RUN:</label>
-                    <input class="form-control" type="text" name="usuario" id="usuario" placeholder="Ingrese su RUN" autocomplete="off" required>
+                    <input class="form-control" type="text" name="run" id="run" placeholder="Ingrese su RUN" autocomplete="off" required>
+                </div>
+				
+				<div class="form-group">
+                    <label for="usuario">Correo:</label>
+                    <input class="form-control" type="text" name="correo" id="correo" placeholder="ejemplo@mail.com" autocomplete="off" required>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Contraseña:</label>
                     <input type="password" class="form-control" id="password" name="password" autocomplete="off" required>
                 </div>
-				
-                <medium id="emailHelp" class="form-text text-muted"> <a href="View/registro.php">Haga click aquí para registrarse.</a> </medium>
-                <br>
 
+                <medium id="emailHelp" class="form-text text-muted"> <a href="../index.php">Regresar</a> </medium>
+                <br>
+                
                 <input class="btn btn-primary" type="submit" name="submit" value="Aceptar" role="button">
             </form>
             <br>
