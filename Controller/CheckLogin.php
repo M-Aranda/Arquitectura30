@@ -7,12 +7,12 @@
     $dao = new DAO_Usuario();
 
     if(!$dao->checkUser($usuario,$password)){
-		// WIP -- Mejor solución pronto™
+		// WIP -- Mejor soluciï¿½n prontoï¿½
         echo "<script>alert('Sus credenciales son incorrectas, reintente.'); window.location = '../index.php';</script>";
 
     }else{
 
-        // La sesión dura 30 minutos
+        // La sesiï¿½n dura 30 minutos
 
         session_start();
         $_SESSION['loggedin'] = true;
@@ -22,6 +22,6 @@
 
         sleep(1);
 
-        header("location: ../View/inicio.php");
+        header("location: ../View/Ficha_Personal.php");
     }
 ?>
