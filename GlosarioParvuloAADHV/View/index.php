@@ -7,8 +7,13 @@
    
     </head>
     <body>
+       
         
-        
+        <form action="../Controller/Controller_Login.php" method="post">
+            <input type="text" name="rut">
+            <input type="submit" value="entrar">
+            
+        </form>
         <?php
         require_once("../Model/DAO/DAO_Usuario.php");
         
