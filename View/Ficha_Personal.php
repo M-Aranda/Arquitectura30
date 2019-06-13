@@ -121,7 +121,10 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <button onclick="window.location.href='index_palabras.php'">Administrar palabras</button>
 
+                    
 
                     <div class="panel-heading">
                         <h3 class="panel-title">CAMBIO CONTRASEÑA</h3>
@@ -175,6 +178,9 @@
             </div>
         </div>
     </div>
+    
+    
+    
     <!--<footer>Ingenieria en Informatica © 2019</footer>-->
 
     <script type="text/javascript" src="../js/eventos.js"></script>

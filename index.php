@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Inicio de Sesión</title>
+    <title>Inicio de Sesiï¿½n</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="Css/custom_login.css">
     <link rel="shortcut icon" href="favicon.ico">
@@ -15,7 +15,7 @@
 	<br>
 	<br>
 
-	<!-- Prueba de posicionamiento de imágen -->
+	<!-- Prueba de posicionamiento de imï¿½gen -->
     <div class="container">
         <center><img src="Res/p.jpg" alt="" class="img-fluid" style="width: 20%;"></center>
     </div>
@@ -32,11 +32,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Contraseña:</label>
+                    <label for="password">ContraseÃ±a:</label>
                     <input type="password" class="form-control" id="password" name="password" autocomplete="off" required>
                 </div>
 				
-                <medium id="emailHelp" class="form-text text-muted"> <a href="View/registro.php">Haga click aquí para registrarse.</a> </medium>
+                <medium id="emailHelp" class="form-text text-muted"> <a href="View/registro.php">Haga click aquÃ­ para registrarse.</a> </medium>
                 <br>
 
                 <input class="btn btn-primary" type="submit" name="submit" value="Aceptar" role="button">

@@ -12,7 +12,7 @@ class Conexion {
             $this->user = "root";
             $this->pass = "";
         }else{
-            $this->bdName = "bd_podologia";
+            $this->bdName = "bd_parvulo";
             $this->user = "root";
             $this->pass = "";
         }

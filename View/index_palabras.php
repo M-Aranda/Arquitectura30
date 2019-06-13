@@ -8,15 +8,40 @@
         <?php
         require_once("../Model/DAO/DAO_Palabra.php");
 
-        echo "Las palabras son:";   
+        echo "Las palabras son:";
 
-        $dp= new DAO_Palabra();
-
-        $palabras = $dp->read();
-        foreach ($palabras as $p) {?>
-        <h1><?php echo $p->getId(); ?></h1>
-        <?php }
-        
+        $dp = new DAO_Palabra();
         ?>
+
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Palabra</th>
+                    <th>Significado</th>
+                    <th>Ejemplo</th>
+                </tr>
+            </thead>
+            <tbody>
+
+    <?php
+    $palabras = $dp->read();
+    foreach ($palabras as $p) {?>
+                <tr>
+                    <td><?php echo $p->getId();?> </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+    <?php
+    
+    }
+    ?>
+
+                
+            </tbody>
+        </table>
+
+
+
     </body>
 </html>
