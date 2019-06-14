@@ -89,5 +89,27 @@ class DAO_Palabra extends Conexion implements DAO{
         $this->c->desconectar();
         return $obj;
     }
+    
+    
+    
+        public function buscarPalabrasPorFkUsuarioYFkAsignatura($fk_usuario, $fk_asignatura) {
+        
+        $this->c->conectar();
+        $query="SELECT palabra.id, palabra.nombre, palabra.sigla FROM Palabra, Asignatura_Usuario, Palabra_Asignatura_Usuario
+        WHERE Asignatura_Usuario.fk_usuario = ".$fk_usuario." AND Palabra_Asignatura_Usuario.fk_asignatura_usuario=".$fk_asignatura.";";
+        $listado= array();
+        $rs = $this->c->ejecutar($query);
+        while($reg = $rs->fetch_array()){
+             $obj= new Palabra();
+             $obj->setId($reg[0]);
+             $obj->setNombre($reg[1]);
+             $obj->setSigla($reg[2]);
+
+             $listado[]=$obj;
+         }
+         $this->c->desconectar();
+         return $listado;
+        
+    }
 
 }

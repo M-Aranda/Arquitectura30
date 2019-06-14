@@ -9,6 +9,11 @@
             <word>aquí</word>
             <word>Contraseña</word>
             <word>Contraseñññññña</word>
+            <word>Descripción</word>
+            <word>Ejemplos</word>
+            <word>Número</word>
+            <word>palabra</word>
+            <word>Recomendada</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

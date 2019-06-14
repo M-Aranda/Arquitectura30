@@ -80,7 +80,7 @@ class DAO_Palabra_Asignatura extends Conexion implements DAO {
     
     public function findById($id){
         $this->c->conectar();
-        $query="SELECT * FROM Palabra_Asignatura WHERE id= ".$id.";";
+        $query="SELECT * FROM Palabra_Asignatura_Usuario WHERE id= ".$id.";";
       
         $rs = $this->c->ejecutar($query);
         while($reg = $rs->fetch_array()){

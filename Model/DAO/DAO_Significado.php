@@ -8,6 +8,8 @@ require_once("../Model/Palabra_Asignatura.php");
 require_once("../Model/DAO/DAO_Palabra_Asignatura.php");
 
 
+
+
 /**
  * Description of DAO_Significado
  *
@@ -93,6 +95,27 @@ class DAO_Significado extends Conexion implements DAO {
          }
          $this->c->desconectar();
          return $obj;
+        
+    }
+    
+    
+        public function buscarSignificadosAsociadoAIdDePalabra($idDePalabra) {
+        $this->c->conectar();
+        $query="SELECT * FROM Significado WHERE fk_palabra_asignatura_usuario=".$idDePalabra.";";
+        $listado= array();
+        $rs = $this->c->ejecutar($query);
+        while($reg = $rs->fetch_array()){
+             $obj= new Significado();
+             $obj->setId($reg[0]);
+             $obj->setDescripcion($reg[1]);
+             $obj->setDefinicionRecomendada($reg[2]);
+             $dap= new DAO_Palabra_Asignatura();
+             $obj->setPalabra_asignatura($dap->findById($reg[3]));
+
+             $listado[]=$obj;
+         }
+         $this->c->desconectar();
+         return $listado;  
         
     }
 
