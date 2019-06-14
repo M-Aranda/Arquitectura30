@@ -16,21 +16,35 @@
         require_once("../Model/DAO/DAO_Palabra.php");
         require_once("../Model/DAO/DAO_Significado.php");
         require_once("../Model/DAO/DAO_Ejemplo.php");
-
-        echo "Palabras registradas en esta asignatura:";
-        echo "<br>";
-        echo "<br>";
-
+        require_once("../Model/DAO/DAO_Asignatura_Usuario.php");
 
 
         $dp = new DAO_Palabra();
+        $daoAU = new DAO_Asignatura_Usuario();
+        $asignaturasInscritas = $daoAU->buscarTodasLasAsignaturasDelUsuario(1);
+
+        echo "Asignaturas inscritas:";
+        ?>
+
+        <select>
+            <?php foreach ($asignaturasInscritas as $ai) { ?>
+                <option><?php echo $ai->getAsignatura()->getNombre(); ?></option>
+            <?php }
+            ?>
+        </select>
+        <br>
+        <br>
+        <?php
+        echo "Palabras registradas en esta asignatura:";
+        echo "<br>";
+        echo "<br>";
         ?>
 
 
         <table  border="1">
             <thead>
                 <tr>
-                    <th>Número de palabra</th>
+                    <th>Palabra #</th>
                     <th>Palabra</th>
                     <th>Significados</th>
 
@@ -53,17 +67,20 @@
                             <table border="1">
                                 <thead>
                                     <tr>
-                                        <th>Número</th>
+                                        <th>Significado #</th>
                                         <th>Descripción</th>
-                                        <th>Recomendada por docente</th>
+                                        <th>Recomendado por docente</th>
                                         <th>Ejemplos</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <?php foreach ($significados as $s) { ?>
+                                    <?php
+                                    $contador = 1;
+                                    foreach ($significados as $s) {
+                                        ?>
                                         <tr>
-                                            <td><?php echo $s->getId(); ?></td>
+                                            <td><?php echo $contador; ?></td>
                                             <td> <?php echo $s->getDescripcion(); ?></td>
                                             <td> <?php
                                                 if ($s->getDefinicionRecomendada() == true) {
@@ -74,7 +91,10 @@
                                                 ?></td>
                                             <td>  <button onclick="mostrarEjemplos(<?php echo $s->getId(); ?>,<?php echo $p->getId(); ?>)" >Ver ejemplos</button> </td>
                                         </tr>
-                                    <?php }
+
+                                        <?php
+                                        $contador++;
+                                    }
                                     ?>
 
                                 </tbody>
@@ -90,6 +110,28 @@
 
             </tbody>
         </table>
+
+
+
+
+        <form name="registrar_nueva_palabra" method="POST" action="../Controller/CrearPalabra.php">
+            <br>
+            Palabra: <input type="text" name="txtNombre" placeholder="Palabra:" required>
+            <br>
+            Sigla: <input type="text" name="txtSigla" placeholder="Sigla:">
+            <br>
+            Asignatura de la palabra:      
+            <select name="cboAsignatura">
+                <?php foreach ($asignaturasInscritas as $ai) { ?>
+                <option value="<?php echo $ai->getAsignatura()->getId();?>"><?php echo $ai->getAsignatura()->getNombre(); ?></option>
+                <?php }
+                ?>
+            </select>
+            <br>
+            <br>
+            <input type="submit" value="Registrar">
+        </form>
+
 
 
     </body>
@@ -116,12 +158,14 @@
 
                 });
 
-           
+
             });
 
 
 
         }
+        
+        
 
 
 

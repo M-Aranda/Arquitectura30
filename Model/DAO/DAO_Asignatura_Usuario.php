@@ -61,10 +61,7 @@ class DAO_Asignatura_Usuario extends Conexion implements DAO{
          }
          $this->c->desconectar();
          return $listado;
-        
-        
-        
-        
+     
     }
 
     public function update($objeto) {
@@ -75,6 +72,37 @@ class DAO_Asignatura_Usuario extends Conexion implements DAO{
       $this->c->ejecutar($query);
       $this->c->desconectar();   
     }
+    
+    
+     public function buscarTodasLasAsignaturasDelUsuario($idUsuario) {
+        $this->c->conectar();
+        $query="SELECT * FROM Asignatura_Usuario WHERE fk_usuario=".$idUsuario.";";
+      
+        $listado= array();
+        $rs = $this->c->ejecutar($query);
+        while($reg = $rs->fetch_array()){
+             $obj= new Asignatura_Usuario();
+             $obj->setId($reg[0]);
+             
+             $du= new DAO_Usuario();
+             $da= new DAO_Asignatura();
+             
+             $obj->setUsuario($du->findById($reg[1]));
+             $obj->setAsignatura($da->findById($reg[2]));
+
+             $listado[]=$obj;
+         }
+         $this->c->desconectar();
+         return $listado;
+        
+        
+        
+        
+    }
+    
+    
+    
+    
 
 
 }

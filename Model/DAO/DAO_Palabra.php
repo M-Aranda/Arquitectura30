@@ -1,4 +1,5 @@
 <?php
+
 require_once("DAO.php");
 require_once("../Model/Conexion.php");
 require_once("../Model/Palabra.php");
@@ -15,71 +16,62 @@ require_once("../Model/Palabra.php");
  *
  * @author Cheloz
  */
-class DAO_Palabra extends Conexion implements DAO{
-
+class DAO_Palabra extends Conexion implements DAO {
 
     private $c;
-    
+
     public function __construct() {
         $this->c = new Conexion(
-        "bd_parvulo",
-        "root",
-        "");
+                "bd_parvulo", "root", "");
     }
- 
-    
-    
+
     public function create($objeto) {
-      $query="INSERT INTO Palabra VALUES (NULL, '".$objeto->getNombre()."', '".$objeto->getSigla()."' );"; 
-     
- 
-      $this->c->conectar();
-      $this->c->ejecutar($query);
-      $this->c->desconectar();  
-        
+        $query = "INSERT INTO Palabra VALUES (NULL, '" . $objeto->getNombre() . "', '" . $objeto->getSigla() . "' );";
+
+
+        $this->c->conectar();
+        $this->c->ejecutar($query);
+        $this->c->desconectar();
     }
 
     public function delete($id) {
-      $query="DELETE FROM Palabra WHERE id=".$id." ;"; 
-     
-      $this->c->conectar();
-      $this->c->ejecutar($query);
-      $this->c->desconectar();  
-        
+        $query = "DELETE FROM Palabra WHERE id=" . $id . " ;";
+
+        $this->c->conectar();
+        $this->c->ejecutar($query);
+        $this->c->desconectar();
     }
 
     public function read() {
-        
-        $this->c->conectar();
-        $query="SELECT * FROM Palabra;";
-        $listado= array();
-        $rs = $this->c->ejecutar($query);
-        while($reg = $rs->fetch_array()){
-             $obj= new Palabra();
-             $obj->setId($reg[0]);
-             $obj->setNombre($reg[1]);
-             $obj->setSigla($reg[2]);
 
-             $listado[]=$obj;
-         }
-         $this->c->desconectar();
-         return $listado;
-        
+        $this->c->conectar();
+        $query = "SELECT * FROM Palabra;";
+        $listado = array();
+        $rs = $this->c->ejecutar($query);
+        while ($reg = $rs->fetch_array()) {
+            $obj = new Palabra();
+            $obj->setId($reg[0]);
+            $obj->setNombre($reg[1]);
+            $obj->setSigla($reg[2]);
+
+            $listado[] = $obj;
+        }
+        $this->c->desconectar();
+        return $listado;
     }
 
     public function update($objeto) {
-      $query="UPDATE Palabra SET nombre='".$objeto->getNombre()."', sigla='".$objeto->getSigla()."' WHERE id=".$objeto->getId().";"; 
-     
-      $this->c->conectar();
-      $this->c->ejecutar($query);
-      $this->c->desconectar();  
-    }
-    
-        
-        public function findById($id) {
+        $query = "UPDATE Palabra SET nombre='" . $objeto->getNombre() . "', sigla='" . $objeto->getSigla() . "' WHERE id=" . $objeto->getId() . ";";
+
         $this->c->conectar();
-        $query = "SELECT * FROM Palabra WHERE id= ".$id.";";
-        
+        $this->c->ejecutar($query);
+        $this->c->desconectar();
+    }
+
+    public function findById($id) {
+        $this->c->conectar();
+        $query = "SELECT * FROM Palabra WHERE id= " . $id . ";";
+
         $rs = $this->c->ejecutar($query);
         while ($reg = $rs->fetch_array()) {
             $obj = new Palabra();
@@ -90,27 +82,41 @@ class DAO_Palabra extends Conexion implements DAO{
         $this->c->desconectar();
         return $obj;
     }
-    
-    
-    
-        public function buscarPalabrasPorFkUsuarioYFkAsignatura($fk_usuario, $fk_asignatura) {
-        
-        $this->c->conectar();
-        $query="SELECT palabra.id, palabra.nombre, palabra.sigla FROM Palabra, Asignatura_Usuario, Palabra_Asignatura_Usuario
-        WHERE Asignatura_Usuario.fk_usuario = ".$fk_usuario." AND Palabra_Asignatura_Usuario.fk_asignatura_usuario=".$fk_asignatura.";";
-        $listado= array();
-        $rs = $this->c->ejecutar($query);
-        while($reg = $rs->fetch_array()){
-             $obj= new Palabra();
-             $obj->setId($reg[0]);
-             $obj->setNombre($reg[1]);
-             $obj->setSigla($reg[2]);
 
-             $listado[]=$obj;
-         }
-         $this->c->desconectar();
-         return $listado;
-        
+    public function buscarPalabrasPorFkUsuarioYFkAsignatura($fk_usuario, $fk_asignatura) {
+
+        $this->c->conectar();
+        $query = "SELECT palabra.id, palabra.nombre, palabra.sigla FROM Palabra, Asignatura_Usuario, Palabra_Asignatura_Usuario
+        WHERE Asignatura_Usuario.fk_usuario = " . $fk_usuario . " AND Palabra_Asignatura_Usuario.fk_asignatura_usuario=" . $fk_asignatura . " "
+        . " AND Palabra.id=Palabra_Asignatura_Usuario.fk_palabra AND
+         Palabra_Asignatura_Usuario.fk_asignatura_usuario=Asignatura_Usuario.id;";
+        $listado = array();
+        $rs = $this->c->ejecutar($query);
+        while ($reg = $rs->fetch_array()) {
+            $obj = new Palabra();
+            $obj->setId($reg[0]);
+            $obj->setNombre($reg[1]);
+            $obj->setSigla($reg[2]);
+
+            $listado[] = $obj;
+        }
+        $this->c->desconectar();
+        return $listado;
+    }
+    
+    
+        public function findIDDePalabraMasReciente() {
+        $this->c->conectar();
+        $query = "SELECT MAX(id) FROM Palabra;";
+
+        $rs = $this->c->ejecutar($query);
+        while ($reg = $rs->fetch_array()) {
+            
+            $obj=$reg[0];
+
+        }
+        $this->c->desconectar();
+        return $obj;
     }
 
 }

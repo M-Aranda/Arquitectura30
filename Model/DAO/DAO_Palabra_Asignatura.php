@@ -27,15 +27,25 @@ class DAO_Palabra_Asignatura extends Conexion implements DAO {
     }
     
     public function create($objeto) {
-      $query="INSERT INTO Palabra_Asignatura VALUES (NULL, '".$objeto->getPalabra()->getId()."', ".$objeto->getAsignatura()->getId()." );";
-     
+
+      $query="INSERT INTO Palabra_Asignatura_Usuario VALUES (NULL, ".$objeto->getPalabra()->getId().", ".$objeto->getAsignatura()->getId()." );";
+      $this->c->conectar();
+      $this->c->ejecutar($query);
+      $this->c->desconectar();   
+    }
+    
+    
+    //por alguna razón el create de arriba me pasa strings en vez de los objetos palabra y asignatura, así que hice este.
+      public function createAlternativo($idPal, $idAsig) {
+
+      $query="INSERT INTO Palabra_Asignatura_Usuario VALUES (NULL, ".$idPal.", ".$idAsig." );";
       $this->c->conectar();
       $this->c->ejecutar($query);
       $this->c->desconectar();   
     }
 
     public function delete($id) {
-      $query="DELETE FROM  Palabra_Asignatura WHERE id=".$id.";";
+      $query="DELETE FROM  Palabra_Asignatura_Usuario WHERE id=".$id.";";
       
      
       $this->c->conectar();
@@ -45,7 +55,7 @@ class DAO_Palabra_Asignatura extends Conexion implements DAO {
 
     public function read() {
         $this->c->conectar();
-        $query="SELECT * FROM Palabra_Asignatura;";
+        $query="SELECT * FROM Palabra_Asignatura_Usuario;";
         $listado= array();
         $rs = $this->c->ejecutar($query);
         while($reg = $rs->fetch_array()){
@@ -69,7 +79,7 @@ class DAO_Palabra_Asignatura extends Conexion implements DAO {
     }
 
     public function update($objeto) {
-      $query="UPDATE Palabra_Asignatura SET fk_palabra= ".$objeto->getPalabra()->getId().", fk_asignatura=".$objeto->getAsignatura()->getId()." "
+      $query="UPDATE Palabra_Asignatura_Usuario SET fk_palabra= ".$objeto->getPalabra()->getId().", fk_asignatura=".$objeto->getAsignatura()->getId()." "
               . "WHERE id=".$objeto->getId()." ;";
       echo $query;
      
