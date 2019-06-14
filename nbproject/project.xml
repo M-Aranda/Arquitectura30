@@ -10,10 +10,14 @@
             <word>Contraseña</word>
             <word>Contraseñññññña</word>
             <word>Descripción</word>
+            <word>ejemplo</word>
             <word>Ejemplos</word>
+            <word>Imágen</word>
             <word>Número</word>
             <word>palabra</word>
+            <word>palabras</word>
             <word>Recomendada</word>
+            <word>Sesión</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

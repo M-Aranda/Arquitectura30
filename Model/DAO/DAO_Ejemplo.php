@@ -84,14 +84,33 @@ class DAO_Ejemplo extends Conexion implements DAO{
              $obj->setUrl_imagen($reg[2]);   
              $das= new DAO_Significado();
              $obj->setSignificado($das->findById($reg[3]));
-             
 
-
-             
          }
          $this->c->desconectar();
          return $obj;
         
     }
+    
+    
+        public function listarEjemplosDeUnSignificado($idDeSignificado) {
+        $this->c->conectar();
+        $query="SELECT * FROM Ejemplo WHERE fk_significado=".$idDeSignificado.";";
+        $listado= array();
+        $rs = $this->c->ejecutar($query);
+        while($reg = $rs->fetch_array()){
+             $obj= new Ejemplo();
+             $obj->setId($reg[0]);
+             $obj->setFraseExplicativa($reg[1]);
+             $obj->setUrl_imagen($reg[2]);
+             $das= new DAO_Significado();
+             $obj->setSignificado($das->findById($reg[3]));
+
+             $listado[]=$obj;
+         }
+         $this->c->desconectar();
+         return $listado;  
+        
+    }
+    
 
 }

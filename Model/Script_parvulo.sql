@@ -66,17 +66,18 @@ INSERT INTO Asignatura_Usuario VALUES(NULL, '1', '1');
 INSERT INTO Palabra VALUES(NULL,'Patrón','Arqu');
 INSERT INTO Palabra_Asignatura_Usuario VALUES(NULL, '1', '1');
 
-INSERT INTO Significado VALUES(NULL,'Una forma de estructurar un software',0,1);
+INSERT INTO Significado VALUES(NULL,'Una forma de diseñar un sw',1,1);
 INSERT INTO Ejemplo VALUES(NULL,'El patrón MVC','No disponible',1);
 
 
-
+/*
 SELECT palabra.id, palabra.nombre, palabra.sigla FROM Palabra, Asignatura_Usuario, Palabra_Asignatura_Usuario
 WHERE Asignatura_Usuario.fk_usuario =1 AND Palabra_Asignatura_Usuario.fk_asignatura_usuario=1;
 
 SELECT * FROM Significado WHERE fk_palabra_asignatura_usuario=1;
 
 SELECT * FROM Ejemplo WHERE fk_significado=1;
+*/
 
 /*
 SELECT * FROM Usuario;
