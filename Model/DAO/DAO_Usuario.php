@@ -66,14 +66,36 @@ class DAO_Usuario extends Conexion implements DAO {
             $usuario = new Usuario($reg[0], $reg[1], $reg[2], $reg[3], $reg[4], $reg[5]);
         }
         $this->c->desconectar();
-        
-        if(!$usuario == null){
+
+        if (!$usuario == null) {
             $check = true;
         } else {
             $check = false;
         }
-        
+
         return $check;
+    }
+
+    public function fetchUser($requestedUser, $password) {
+        $usuario = null;
+
+        $query = "SELECT * FROM Usuario WHERE rut = '$requestedUser' AND "
+                . "contrasenia = '$password'";
+
+        $this->c->conectar();
+        $rs = $this->c->ejecutar($query);
+        if ($reg = $rs->fetch_array()) {
+            $usuario = new Usuario();
+            $usuario->setId($reg[0]);
+            $usuario->setNombre($reg[1]);
+            $usuario->setEsProfesor($reg[2]);
+            $usuario->setRut($reg[3]);
+            $usuario->setContrasenia($reg[4]);
+            $usuario->setCorreo($reg[5]);
+        }
+        $this->c->desconectar();
+        
+        return $usuario;
     }
 
     public function update($objeto) {
@@ -143,21 +165,22 @@ class DAO_Usuario extends Conexion implements DAO {
         $this->c->desconectar();
         return $obj;
     }
-	
-	public function existeUser($nombre, $run){
-		$query = "SELECT COUNT(*) FROM Usuario WHERE nombre = '$nombre' AND rut = '$run'";
-		$this->c->conectar();
-		$rs = $this->c->ejecutar($query);
-		
-		$existe = false;
-		
-		if($reg = $rs->fetch_array()){
-			if($reg[0]==1){
-				$existe = true;
-				}
-		}
-		
-		$this->c->desconectar();
-		return $existe;
-	}
+
+    public function existeUser($nombre, $run) {
+        $query = "SELECT COUNT(*) FROM Usuario WHERE nombre = '$nombre' AND rut = '$run'";
+        $this->c->conectar();
+        $rs = $this->c->ejecutar($query);
+
+        $existe = false;
+
+        if ($reg = $rs->fetch_array()) {
+            if ($reg[0] == 1) {
+                $existe = true;
+            }
+        }
+
+        $this->c->desconectar();
+        return $existe;
+    }
+
 }

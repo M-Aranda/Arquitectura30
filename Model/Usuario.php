@@ -70,9 +70,4 @@ class Usuario {
     public function setCorreo($correo) {
         $this->correo = $correo;
     }
-
-
-
-    
-    
 }

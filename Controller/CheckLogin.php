@@ -14,9 +14,14 @@
 
         // La sesi�n dura 30 minutos
 
+        $fetchedUser = $dao->fetchUser($usuario, $password);
         session_start();
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $usuario;
+        $_SESSION['nombre'] = $fetchedUser->getNombre();
+        $_SESSION["rut"] = $fetchedUser->getRut();
+        $_SESSION["correo"] = $fetchedUser->getCorreo();
+        $_SESSION["contrasenia"] = $fetchedUser->getContrasenia();
         $_SESSION['start'] = time();
         $_SESSION['expire'] = $_SESSION['start'] + (30 * 60);
 
