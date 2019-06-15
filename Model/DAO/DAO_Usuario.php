@@ -143,5 +143,21 @@ class DAO_Usuario extends Conexion implements DAO {
         $this->c->desconectar();
         return $obj;
     }
-
+	
+	public function existeUser($nombre, $run){
+		$query = "SELECT COUNT(*) FROM Usuario WHERE nombre = '$nombre' AND rut = '$run'";
+		$this->c->conectar();
+		$rs = $this->c->ejecutar($query);
+		
+		$existe = false;
+		
+		if($reg = $rs->fetch_array()){
+			if($reg[0]==1){
+				$existe = true;
+				}
+		}
+		
+		$this->c->desconectar();
+		return $existe;
+	}
 }
