@@ -2,6 +2,10 @@ CREATE DATABASE bd_parvulo;
 /* DROP DATABASE bd_parvulo; */
 USE bd_parvulo;
 
+CREATE TABLE anio_ingreso(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    anio INT
+);
 
 CREATE TABLE Usuario(
 id INT AUTO_INCREMENT,
@@ -11,6 +15,12 @@ rut  VARCHAR (13) UNIQUE,
 contrasenia VARCHAR (16),
 correo VARCHAR (50),
 PRIMARY KEY(id)
+);
+
+CREATE TABLE anio_usuario(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    fk_anio_ingreso INT REFERENCES anio_ingreso (id),
+    fk_usuario INT REFERENCES usuario (id)
 );
 
 CREATE TABLE Asignatura(
@@ -26,8 +36,6 @@ fk_usuario INT REFERENCES Usuario (id),
 fk_asignatura INT REFERENCES Asignatura (id)
 );
 
-
-
 CREATE TABLE Palabra(
 id INT AUTO_INCREMENT,
 nombre VARCHAR (100),
@@ -40,9 +48,6 @@ id INT AUTO_INCREMENT PRIMARY KEY,
 fk_palabra INT REFERENCES Palabra (id),
 fk_asignatura_usuario INT REFERENCES Asignatura_Usuario (id)
 );
-
-
-
 
 CREATE TABLE Significado(
 id INT AUTO_INCREMENT,
@@ -67,6 +72,10 @@ INSERT INTO Usuario VALUES(NULL,'Francisca',0,'12','pass','fran@hotmail.com');
 INSERT INTO Usuario VALUES(NULL,'Samantha',0,'123','sami','sam@hotmail.com');
 INSERT INTO Usuario VALUES(NULL,'Samantha',1,'333','aaa','sam@hotmail.com');
 INSERT INTO Usuario VALUES(NULL,'Alumnos sin asignaturas',0,'111','qqq','sam@hotmail.com');
+
+INSERT INTO anio_ingreso VALUES(NULL, 2017);
+
+INSERT INTO anio_usuario VALUES(NULL, 1, 1);
 
 INSERT INTO Asignatura VALUES(NULL,'Conceptos de juego','C');
 INSERT INTO Asignatura VALUES(NULL,'Niñez explicada','NE');
@@ -104,6 +113,45 @@ INSERT INTO Significado VALUES(NULL,'Instrumento musical de percusión',0,3);
 INSERT INTO Ejemplo VALUES(NULL,'El tambor se toca poco','No disponible',3);
 INSERT INTO Ejemplo VALUES(NULL,'El tambor  suena fuerte','No disponible',3);
 
+DELIMITER //
+CREATE PROCEDURE return_usuario_by_ingreso(req_anio_ingreso INT)
+	BEGIN
+		SELECT 
+			Usuario.id,
+			Usuario.nombre
+		FROM
+			Usuario,
+            anio_ingreso,
+			anio_usuario
+		WHERE
+			Usuario.id = anio_usuario.fk_usuario AND
+            anio_ingreso.id = anio_usuario.fk_anio_ingreso AND
+            anio_ingreso.anio = req_anio_ingreso;
+	END //
+DELIMITER ;
+DROP PROCEDURE return_usuario_by_ingreso;
+
+/*Procedimiento malo, no usar*/
+DELIMITER //
+CREATE PROCEDURE return_palabra_by_user_and_asignatura_id(user_id INT, asignatura_id INT)
+	BEGIN
+		SELECT
+			Palabra.nombre,
+            Palabra.sigla,
+            Asignatura.nombre
+		FROM
+			Usuario,
+            Asignatura,
+            Asignatura_Usuario,
+            Palabra,
+            Palabra_Asignatura_Usuario
+		WHERE
+			Usuario.id = Asignatura_Usuario.fk_usuario AND
+            Asignatura.id = Asignatura_Usuario.fk_asignatura AND
+            Palabra.id = Palabra_Asignatura_Usuario.fk_palabra AND
+            Asignatura_Usuario.id = Palabra_Asignatura_Usuario.fk_asignatura_usuario;
+	END //
+DELIMITER ;
 
 /*
 SELECT palabra.id, palabra.nombre, palabra.sigla FROM Palabra, Asignatura_Usuario, Palabra_Asignatura_Usuario

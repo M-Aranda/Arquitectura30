@@ -94,8 +94,24 @@ class DAO_Usuario extends Conexion implements DAO {
             $usuario->setCorreo($reg[5]);
         }
         $this->c->desconectar();
-        
+
         return $usuario;
+    }
+
+    public function fetchUserNombreIdByAnio($req_anio_ingreso) {
+        $this->c->conectar();
+        $query = "CALL return_usuario_by_ingreso($req_anio_ingreso);";
+        $listado = array();
+        $rs = $this->c->ejecutar($query);
+        while ($reg = $rs->fetch_array()) {
+            $obj = new Usuario();
+            $obj->setId($reg[0]);
+            $obj->setNombre($reg[1]);
+            
+            $listado[] = $obj;
+        }
+        $this->c->desconectar();
+        return $listado;
     }
 
     public function update($objeto) {
