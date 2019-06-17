@@ -65,7 +65,7 @@ class DAO_Significado extends Conexion implements DAO {
     }
 
     public function update($objeto) {
-    $query="UPDATE Significado SET descripcion= '".$objeto->getDescripcion()."', definicionRecomendada=".$objeto->getDefinicionRecomendada().", fk_palabra_asignatura= ".$objeto->getPalabra_asignatura()->getId()." WHERE id="
+    $query="UPDATE Significado SET descripcion= '".$objeto->getDescripcion()."', definicionRecomendada=".$objeto->getDefinicionRecomendada().", fk_palabra_asignatura_usuario= ".$objeto->getPalabra_asignatura()->getId()." WHERE id="
             . " ".$objeto->getId().";"; 
 
      

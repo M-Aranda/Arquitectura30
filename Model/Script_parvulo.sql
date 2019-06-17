@@ -41,6 +41,9 @@ fk_palabra INT REFERENCES Palabra (id),
 fk_asignatura_usuario INT REFERENCES Asignatura_Usuario (id)
 );
 
+
+
+
 CREATE TABLE Significado(
 id INT AUTO_INCREMENT,
 descripcion VARCHAR (100),
@@ -62,10 +65,13 @@ PRIMARY KEY(id)
 INSERT INTO Usuario VALUES(NULL,'Carla',0,'1','123','ccar@hotmail.com');
 INSERT INTO Usuario VALUES(NULL,'Francisca',0,'12','pass','fran@hotmail.com');
 INSERT INTO Usuario VALUES(NULL,'Samantha',0,'123','sami','sam@hotmail.com');
+INSERT INTO Usuario VALUES(NULL,'Samantha',1,'333','aaa','sam@hotmail.com');
+INSERT INTO Usuario VALUES(NULL,'Alumnos sin asignaturas',0,'111','qqq','sam@hotmail.com');
 
 INSERT INTO Asignatura VALUES(NULL,'Conceptos de juego','C');
 INSERT INTO Asignatura VALUES(NULL,'Niñez explicada','NE');
 INSERT INTO Asignatura VALUES(NULL,'Pedadogía básica','PB');
+INSERT INTO Asignatura VALUES(NULL,'Religion','RG');
 
 INSERT INTO Asignatura_Usuario VALUES(NULL, '1', '1');
 INSERT INTO Asignatura_Usuario VALUES(NULL, '1', '2');
@@ -77,6 +83,7 @@ INSERT INTO Asignatura_Usuario VALUES(NULL, '2', '3');
 INSERT INTO Asignatura_Usuario VALUES(NULL, '3', '1');
 INSERT INTO Asignatura_Usuario VALUES(NULL, '3', '2');
 INSERT INTO Asignatura_Usuario VALUES(NULL, '3', '3');
+INSERT INTO Asignatura_Usuario VALUES(NULL, '3', '4');
 
 
 INSERT INTO Palabra VALUES(NULL,'Xilófono','XLFN');

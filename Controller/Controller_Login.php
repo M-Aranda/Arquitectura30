@@ -12,6 +12,7 @@ $usuario = $du->readLogin($rut);
 if($validacion != null){
     foreach ($usuario as $u) {
         session_start();
+        $_SESSION["usuarioIniciado"] = $u;
         $_SESSION["nombre"]         = $u->getNombre();
         $_SESSION["rut"]            = $u->getRut();
         $_SESSION["contrasenia"]    = $u->getContrasenia();

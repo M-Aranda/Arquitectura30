@@ -17,21 +17,45 @@
         require_once("../Model/DAO/DAO_Significado.php");
         require_once("../Model/DAO/DAO_Ejemplo.php");
         require_once("../Model/DAO/DAO_Asignatura_Usuario.php");
+        require_once("../Model/DAO/DAO_Usuario.php");
+        require_once("../Model/Usuario.php");
 
+
+
+        session_start();
+
+        if ($_SESSION["usuarioIniciado"] != null) {
+            $u = $_SESSION["usuarioIniciado"];
+        }
 
         $dp = new DAO_Palabra();
         $daoAU = new DAO_Asignatura_Usuario();
-        $asignaturasInscritas = $daoAU->buscarTodasLasAsignaturasDelUsuario(1);
+        $asignaturasInscritas = $daoAU->buscarTodasLasAsignaturasDelUsuario($u->getId());
+
+        if ($asignaturasInscritas == null) {
+            header("location: errorSinAsignaturas.php");
+        }
+
 
         echo "Asignaturas inscritas:";
         ?>
 
-        <select>
-            <?php foreach ($asignaturasInscritas as $ai) { ?>
-                <option><?php echo $ai->getAsignatura()->getNombre(); ?></option>
-            <?php }
-            ?>
-        </select>
+        <form name="cboAsignaturaAVer" method="POST" action="../Controller/CargarPalabrasDeAsignatura.php">
+            <select name="opcionSele">
+                <?php foreach ($asignaturasInscritas as $ai) { ?>
+                    <option value="<?php echo $ai->getAsignatura()->getId(); ?> "><?php echo $ai->getAsignatura()->getNombre(); ?></option>
+                <?php }
+                ?>
+            </select>
+            <br>
+            <input type="submit" value="Ver palabras">
+        </form>
+
+
+
+        <br>
+        <br>
+
         <br>
         <br>
         <?php
@@ -46,6 +70,7 @@
                 <tr>
                     <th>Palabra #</th>
                     <th>Palabra</th>
+                    <th>Agregar significado</th>
                     <th>Significados</th>
 
                 </tr>
@@ -54,13 +79,32 @@
 
                 <?php
                 $ds = new DAO_Significado();
-                $palabras = $dp->buscarPalabrasPorFkUsuarioYFkAsignatura(1, 1);
+
+
+                $arrayDeIdsDeAsignaturasInscritas = array();
+                foreach ($asignaturasInscritas as $ai) {
+                    $arrayDeIdsDeAsignaturasInscritas[] = $ai->getAsignatura()->getId();
+                }
+
+                $idDeAsigPalabras = min($arrayDeIdsDeAsignaturasInscritas);
+                if (isset($_SESSION["idAsigAVer"])) {
+                    $idDeAsigPalabras = $_SESSION["idAsigAVer"];
+                }
+
+
+
+
+                $palabras = $dp->buscarPalabrasPorFkUsuarioYFkAsignatura($u->getId(), $idDeAsigPalabras);
+
+
+
                 foreach ($palabras as $p) {
                     ?>
                     <tr>
 
                         <td><?php echo $p->getId(); ?> </td>
                         <td><?php echo $p->getNombre(); ?> </td>
+                        <td><button onclick="agregarSignificado(<?php echo $p->getId();?>)">Agregar significado</button> </td>
                         <td><?php $significados = $ds->buscarSignificadosAsociadoAIdDePalabra($p->getId());
                     ?>
 
@@ -123,7 +167,7 @@
             Asignatura de la palabra:      
             <select name="cboAsignatura">
                 <?php foreach ($asignaturasInscritas as $ai) { ?>
-                <option value="<?php echo $ai->getAsignatura()->getId();?>"><?php echo $ai->getAsignatura()->getNombre(); ?></option>
+                    <option value="<?php echo $ai->getAsignatura()->getId(); ?>"><?php echo $ai->getAsignatura()->getNombre(); ?></option>
                 <?php }
                 ?>
             </select>
@@ -131,6 +175,9 @@
             <br>
             <input type="submit" value="Registrar">
         </form>
+        <br>
+        <br>
+        <a href="Ficha_Personal.php">Atrás</a>
 
 
 
@@ -140,6 +187,21 @@
 
 
     <script>
+
+
+        function agregarSignificado(idPalabra) {
+
+
+            Swal.fire({
+                type: 'info',
+                title: 'Agregando significado ',
+                html: '<form name="agergarSignificado" action="../Controller/AgregarSignificado.php"> <input name="idDePalabra" type="hidden" value="'+idPalabra+'"> <input name="significadoAAgregar" type="text" placeholder="significado:"> <input type="submit" value="Guardar"> </form>',
+                showCancelButton: false,
+                showConfirmButton: false
+
+            });
+        }
+
 
         function mostrarEjemplos(idDeSignificado) {
 
@@ -164,8 +226,8 @@
 
 
         }
-        
-        
+
+
 
 
 

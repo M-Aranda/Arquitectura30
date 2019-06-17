@@ -39,4 +39,4 @@ $daoPalabraAsignatura->createAlternativo($idPalabraMasReciente, $idAsigntaura);
 
 
 
-header("location: ../View/Ficha_Personal.php");
+header("location: ../View/index_palabras.php.php");

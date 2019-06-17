@@ -24,6 +24,8 @@
         $_SESSION["contrasenia"] = $fetchedUser->getContrasenia();
         $_SESSION['start'] = time();
         $_SESSION['expire'] = $_SESSION['start'] + (30 * 60);
+        
+        $_SESSION["usuarioIniciado"] = $fetchedUser;
 
         sleep(1);
 

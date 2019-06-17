@@ -15,102 +15,109 @@ require_once("../Model/DAO/DAO_Asignatura.php");
  * @author Cheloz
  */
 class DAO_Palabra_Asignatura extends Conexion implements DAO {
+
     //put your code here
-     
+
     private $c;
-    
+
     public function __construct() {
         $this->c = new Conexion(
-        "bd_parvulo",
-        "root",
-        "");
+                "bd_parvulo", "root", "");
     }
-    
+
     public function create($objeto) {
 
-      $query="INSERT INTO Palabra_Asignatura_Usuario VALUES (NULL, ".$objeto->getPalabra()->getId().", ".$objeto->getAsignatura()->getId()." );";
-      $this->c->conectar();
-      $this->c->ejecutar($query);
-      $this->c->desconectar();   
+        $query = "INSERT INTO Palabra_Asignatura_Usuario VALUES (NULL, " . $objeto->getPalabra()->getId() . ", " . $objeto->getAsignatura()->getId() . " );";
+        $this->c->conectar();
+        $this->c->ejecutar($query);
+        $this->c->desconectar();
     }
-    
-    
-    //por alguna razón el create de arriba me pasa strings en vez de los objetos palabra y asignatura, así que hice este.
-      public function createAlternativo($idPal, $idAsig) {
 
-      $query="INSERT INTO Palabra_Asignatura_Usuario VALUES (NULL, ".$idPal.", ".$idAsig." );";
-      $this->c->conectar();
-      $this->c->ejecutar($query);
-      $this->c->desconectar();   
+    //por alguna razón el create de arriba me pasa strings en vez de los objetos palabra y asignatura, así que hice este.
+    public function createAlternativo($idPal, $idAsig) {
+
+        $query = "INSERT INTO Palabra_Asignatura_Usuario VALUES (NULL, " . $idPal . ", " . $idAsig . " );";
+        $this->c->conectar();
+        $this->c->ejecutar($query);
+        $this->c->desconectar();
     }
 
     public function delete($id) {
-      $query="DELETE FROM  Palabra_Asignatura_Usuario WHERE id=".$id.";";
-      
-     
-      $this->c->conectar();
-      $this->c->ejecutar($query);
-      $this->c->desconectar();
+        $query = "DELETE FROM  Palabra_Asignatura_Usuario WHERE id=" . $id . ";";
+
+
+        $this->c->conectar();
+        $this->c->ejecutar($query);
+        $this->c->desconectar();
     }
 
     public function read() {
         $this->c->conectar();
-        $query="SELECT * FROM Palabra_Asignatura_Usuario;";
-        $listado= array();
+        $query = "SELECT * FROM Palabra_Asignatura_Usuario;";
+        $listado = array();
         $rs = $this->c->ejecutar($query);
-        while($reg = $rs->fetch_array()){
-             $obj= new Palabra_Asignatura();
-             $obj->setId($reg[0]);
-             
-             $dp= new DAO_Palabra();
-             $da= new DAO_Asignatura();
-             
-             $obj->setPalabra($dp->findById($reg[1]));
-             $obj->setAsignatura($da->findById($reg[2]));
+        while ($reg = $rs->fetch_array()) {
+            $obj = new Palabra_Asignatura();
+            $obj->setId($reg[0]);
 
-             $listado[]=$obj;
-         }
-         $this->c->desconectar();
-         return $listado;
-        
-        
-        
-        
+            $dp = new DAO_Palabra();
+            $da = new DAO_Asignatura();
+
+            $obj->setPalabra($dp->findById($reg[1]));
+            $obj->setAsignatura($da->findById($reg[2]));
+
+            $listado[] = $obj;
+        }
+        $this->c->desconectar();
+        return $listado;
     }
 
     public function update($objeto) {
-      $query="UPDATE Palabra_Asignatura_Usuario SET fk_palabra= ".$objeto->getPalabra()->getId().", fk_asignatura=".$objeto->getAsignatura()->getId()." "
-              . "WHERE id=".$objeto->getId()." ;";
-      echo $query;
-     
-      $this->c->conectar();
-      $this->c->ejecutar($query);
-      $this->c->desconectar();   
-    }
-    
-    public function findById($id){
-        $this->c->conectar();
-        $query="SELECT * FROM Palabra_Asignatura_Usuario WHERE id= ".$id.";";
-      
-        $rs = $this->c->ejecutar($query);
-        while($reg = $rs->fetch_array()){
-             $obj= new Palabra_Asignatura();
-             $obj->setId($reg[0]);
-             
-             $dp= new DAO_Palabra();
-             $da= new DAO_Asignatura();
-             
-             $obj->setPalabra($dp->findById($reg[1]));
-             $obj->setAsignatura($da->findById($reg[2]));
+        $query = "UPDATE Palabra_Asignatura_Usuario SET fk_palabra= " . $objeto->getPalabra()->getId() . ", fk_asignatura=" . $objeto->getAsignatura()->getId() . " "
+                . "WHERE id=" . $objeto->getId() . " ;";
+        echo $query;
 
-             
-         }
-         $this->c->desconectar();
-         return $obj;
-        
+        $this->c->conectar();
+        $this->c->ejecutar($query);
+        $this->c->desconectar();
     }
-    
-    
-    
+
+    public function findById($id) {
+        $this->c->conectar();
+        $query = "SELECT * FROM Palabra_Asignatura_Usuario WHERE id= " . $id . ";";
+
+        $rs = $this->c->ejecutar($query);
+        while ($reg = $rs->fetch_array()) {
+            $obj = new Palabra_Asignatura();
+            $obj->setId($reg[0]);
+
+            $dp = new DAO_Palabra();
+            $da = new DAO_Asignatura();
+
+            $obj->setPalabra($dp->findById($reg[1]));
+            $obj->setAsignatura($da->findById($reg[2]));
+        }
+        $this->c->desconectar();
+        return $obj;
+    }
+
+    public function findByfkPalabrayFkAsignaturaUsuario($fkPal, $fkAsigUsu) {
+        $this->c->conectar();
+        $query = "SELECT * FROM Palabra_Asignatura_Usuario WHERE fk_palabra=" . $fkPal . " AND fk_asignatura_usuario=" . $fkAsigUsu . ";";
+
+        $rs = $this->c->ejecutar($query);
+        while ($reg = $rs->fetch_array()) {
+            $obj = new Palabra_Asignatura();
+            $obj->setId($reg[0]);
+
+            $dp = new DAO_Palabra();
+            $da = new DAO_Asignatura();
+
+            $obj->setPalabra($dp->findById($reg[1]));
+            $obj->setAsignatura($da->findById($reg[2]));
+        }
+        $this->c->desconectar();
+        return $obj;
+    }
 
 }
