@@ -33,8 +33,22 @@ $(document).ready(function () {
         });
     }
     
+    var cboAnioChange = function () {
+        $("#cboAnioIngreso").change(function () {
+            fillTable();
+        });
+    }
+    
+    var cboAsignaturaChange = function () {
+        $("#cboAsignatura").change(function () {
+            fillTable();
+        });
+    }
+    
     fillTable();
     fillCboAnioIngreso();
+    cboAnioChange();
     fillCboAsignatura();
+    cboAsignaturaChange();
 });
 

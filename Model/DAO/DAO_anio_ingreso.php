@@ -2,7 +2,7 @@
 
 require_once("DAO.php");
 require_once("../Model/Conexion.php");
-require_once ("../Model/anio_ingreso.php");
+require_once("../Model/anio_ingreso.php");
 
 class DAO_anio_ingreso extends Conexion implements DAO {
 
@@ -30,8 +30,8 @@ class DAO_anio_ingreso extends Conexion implements DAO {
         $rs = $this->c->ejecutar($query);
         while ($reg = $rs->fetch_array()) {
             $obj = new anio_ingreso();
-            $obj->setId(reg[0]);
-            $obj->setAnio(reg[1]);
+            $obj->setId($reg[0]);
+            $obj->setAnio($reg[1]);
 
             $listado[] = $obj;
         }
