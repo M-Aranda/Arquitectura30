@@ -76,6 +76,7 @@ INSERT INTO Usuario VALUES(NULL,'Alumnos sin asignaturas',0,'111','qqq','sam@hot
 INSERT INTO anio_ingreso VALUES(NULL, 2017);
 
 INSERT INTO anio_usuario VALUES(NULL, 1, 1);
+INSERT INTO anio_usuario VALUES(NULL, 1, 3);
 
 INSERT INTO Asignatura VALUES(NULL,'Conceptos de juego','C');
 INSERT INTO Asignatura VALUES(NULL,'Niñez explicada','NE');
@@ -93,7 +94,6 @@ INSERT INTO Asignatura_Usuario VALUES(NULL, '3', '1');
 INSERT INTO Asignatura_Usuario VALUES(NULL, '3', '2');
 INSERT INTO Asignatura_Usuario VALUES(NULL, '3', '3');
 INSERT INTO Asignatura_Usuario VALUES(NULL, '3', '4');
-
 
 INSERT INTO Palabra VALUES(NULL,'Xilófono','XLFN');
 INSERT INTO Palabra VALUES(NULL,'Compás','CMPS');
@@ -114,44 +114,23 @@ INSERT INTO Ejemplo VALUES(NULL,'El tambor se toca poco','No disponible',3);
 INSERT INTO Ejemplo VALUES(NULL,'El tambor  suena fuerte','No disponible',3);
 
 DELIMITER //
-CREATE PROCEDURE return_usuario_by_ingreso(req_anio_ingreso INT)
-	BEGIN
-		SELECT 
-			Usuario.id,
-			Usuario.nombre
-		FROM
-			Usuario,
-            anio_ingreso,
-			anio_usuario
-		WHERE
-			Usuario.id = anio_usuario.fk_usuario AND
-            anio_ingreso.id = anio_usuario.fk_anio_ingreso AND
-            anio_ingreso.anio = req_anio_ingreso;
-	END //
-DELIMITER ;
-DROP PROCEDURE return_usuario_by_ingreso;
-
-/*Procedimiento malo, no usar*/
-DELIMITER //
-CREATE PROCEDURE return_palabra_by_user_and_asignatura_id(user_id INT, asignatura_id INT)
+CREATE PROCEDURE return_usuario_by_ingreso_and_asignatura(id_anio INT, id_asignatura INT)
 	BEGIN
 		SELECT
-			Palabra.nombre,
-            Palabra.sigla,
-            Asignatura.nombre
+			Usuario.id,
+            Usuario.nombre
 		FROM
 			Usuario,
-            Asignatura,
-            Asignatura_Usuario,
-            Palabra,
-            Palabra_Asignatura_Usuario
+            anio_usuario,
+            Asignatura_Usuario
 		WHERE
-			Usuario.id = Asignatura_Usuario.fk_usuario AND
-            Asignatura.id = Asignatura_Usuario.fk_asignatura AND
-            Palabra.id = Palabra_Asignatura_Usuario.fk_palabra AND
-            Asignatura_Usuario.id = Palabra_Asignatura_Usuario.fk_asignatura_usuario;
+			anio_usuario.fk_usuario = Usuario.id AND
+            anio_usuario.fk_anio_ingreso = id_anio AND
+            Asignatura_Usuario.fk_usuario = Usuario.id AND
+            Asignatura_Usuario.fk_asignatura = id_asignatura;
 	END //
 DELIMITER ;
+DROP PROCEDURE return_usuario_by_ingreso_and_asignatura;
 
 /*
 SELECT palabra.id, palabra.nombre, palabra.sigla FROM Palabra, Asignatura_Usuario, Palabra_Asignatura_Usuario

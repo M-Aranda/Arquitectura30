@@ -98,9 +98,9 @@ class DAO_Usuario extends Conexion implements DAO {
         return $usuario;
     }
 
-    public function fetchUserNombreIdByAnio($req_anio_ingreso) {
+    public function fetchUserNombreIdByAnio($id_anio, $id_asignatura) {
         $this->c->conectar();
-        $query = "CALL return_usuario_by_ingreso($req_anio_ingreso);";
+        $query = "CALL return_usuario_by_ingreso_and_asignatura($id_anio, $id_asignatura);";
         $listado = array();
         $rs = $this->c->ejecutar($query);
         while ($reg = $rs->fetch_array()) {

@@ -19,14 +19,14 @@
         <div class="container">
             <div class="form-control">
                 <div class="form-group">
-                    <label for="anioIngreso">Año de Ingreso:</label>
-                    <select class="form-control" id="anioIngreso">
+                    <label for="cboAnioIngreso">Año de Ingreso:</label>
+                    <select class="form-control" id="cboAnioIngreso">
                         <option>test</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="asignatura">Asignatura</label>
-                    <select class="form-control" id="asignatura">
+                    <label for="cboAsignatura">Asignatura</label>
+                    <select class="form-control" id="cboAsignatura">
                         <option>test</option>
                     </select>
                 </div>
@@ -39,7 +39,7 @@
                                 <th scope="col">Palabras</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbodyAlumnos">
                             <tr>
                                 <td>
                                     test
