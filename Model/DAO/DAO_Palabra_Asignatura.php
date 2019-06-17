@@ -101,9 +101,11 @@ class DAO_Palabra_Asignatura extends Conexion implements DAO {
         return $obj;
     }
 
-    public function findByfkPalabrayFkAsignaturaUsuario($fkPal, $fkAsigUsu) {
+    public function findByfkPalabrayFkAsignaturaUsuario($fkPal, $fkAsig) {
         $this->c->conectar();
-        $query = "SELECT * FROM Palabra_Asignatura_Usuario WHERE fk_palabra=" . $fkPal . " AND fk_asignatura_usuario=" . $fkAsigUsu . ";";
+        $query = "SELECT Palabra_Asignatura_Usuario.id, Palabra_Asignatura_Usuario.fk_palabra, Palabra_Asignatura_Usuario.fk_asignatura_usuario  FROM Palabra,Palabra_Asignatura_Usuario , Asignatura_Usuario, Usuario, Asignatura WHERE Usuario.id=Asignatura_Usuario.fk_usuario AND
+        Asignatura_Usuario.fk_asignatura=Asignatura.id AND Palabra.id=Palabra_Asignatura_Usuario.fk_palabra AND Asignatura_Usuario.id=Palabra_Asignatura_Usuario.fk_asignatura_usuario
+        AND Palabra.id=" . $fkPal . " AND Asignatura.id=" . $fkAsig . ";";
 
         $rs = $this->c->ejecutar($query);
         while ($reg = $rs->fetch_array()) {

@@ -126,6 +126,12 @@ SELECT * FROM Significado;
 SELECT * FROM Ejemplo;
 */
 
+/*
+SELECT Palabra_Asignatura_Usuario.id FROM Palabra,Palabra_Asignatura_Usuario , Asignatura_Usuario, Usuario, Asignatura WHERE Usuario.id=Asignatura_Usuario.fk_usuario AND
+Asignatura_Usuario.fk_asignatura=Asignatura.id AND Palabra.id=Palabra_Asignatura_Usuario.fk_palabra AND Asignatura_Usuario.id=Palabra_Asignatura_Usuario.fk_asignatura_usuario
+AND Palabra.id=1 AND Asignatura.id=1;*/
+
+
 
 /*
 DROP DATABASE bd_parvulo;

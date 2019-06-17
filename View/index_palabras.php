@@ -104,7 +104,7 @@
 
                         <td><?php echo $p->getId(); ?> </td>
                         <td><?php echo $p->getNombre(); ?> </td>
-                        <td><button onclick="agregarSignificado(<?php echo $p->getId();?>)">Agregar significado</button> </td>
+                        <td><button onclick="agregarSignificado(<?php echo $p->getId(); ?>, <?php echo $idDeAsigPalabras; ?>)">Agregar significado</button> </td>
                         <td><?php $significados = $ds->buscarSignificadosAsociadoAIdDePalabra($p->getId());
                     ?>
 
@@ -114,6 +114,7 @@
                                         <th>Significado #</th>
                                         <th>Descripción</th>
                                         <th>Recomendado por docente</th>
+                                        <th>Agregar ejemplo</th>
                                         <th>Ejemplos</th>
                                     </tr>
                                 </thead>
@@ -133,6 +134,7 @@
                                                     echo "No";
                                                 }
                                                 ?></td>
+                                            <td><button onclick="agregarEjemplo(<?php echo $s->getId();?>)">Agregar ejemplo</button></td>
                                             <td>  <button onclick="mostrarEjemplos(<?php echo $s->getId(); ?>,<?php echo $p->getId(); ?>)" >Ver ejemplos</button> </td>
                                         </tr>
 
@@ -188,19 +190,39 @@
 
     <script>
 
-
-        function agregarSignificado(idPalabra) {
+        function agregarSignificado(idPalabra, idAsigUs) {
 
 
             Swal.fire({
                 type: 'info',
                 title: 'Agregando significado ',
-                html: '<form name="agergarSignificado" action="../Controller/AgregarSignificado.php"> <input name="idDePalabra" type="hidden" value="'+idPalabra+'"> <input name="significadoAAgregar" type="text" placeholder="significado:"> <input type="submit" value="Guardar"> </form>',
-                showCancelButton: false,
-                showConfirmButton: false
+                html: '<form name="agergarSignificado" action="../Controller/AgregarSignificado.php"> <input name="idAsig" type="hidden" value="' + idAsigUs + '"> <input name="idDePalabra" type="hidden" value="' + idPalabra + '"> <input name="significadoAAgregar" type="text" placeholder="significado:"> <input type="submit" value="Guardar"> </form>',
+                showCancelButton: true,
+                showConfirmButton: false,
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#d33'
 
             });
         }
+
+
+        function agregarEjemplo(idSignificado) {
+
+
+            Swal.fire({
+                type: 'info',
+                title: 'Agregando ejemplo ',
+                html: '<form name="agergarEjemplo" action="../Controller/CrearEjemplo.php"> <input name="idSig" type="hidden" value="' + idSignificado + '"> <input name="txtEjemplo" type="text" placeholder="Ejemplo:"> <input type="submit" value="Guardar"> </form>',
+                showCancelButton: true,
+                showConfirmButton: false,
+                cancelButtonText: 'Cancelar',
+                cancelButtonColor: '#d33'
+
+            });
+        }
+
+
+
 
 
         function mostrarEjemplos(idDeSignificado) {

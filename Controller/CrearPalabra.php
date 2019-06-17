@@ -32,11 +32,8 @@ $palabraDeAsignatura->setPalabra($daoPalabra->findById($idPalabraMasReciente));
 $palabraDeAsignatura->setAsignatura($idAsigntaura);
 
 
-
 //$daoPalabraAsignatura->create($palabraDeAsignatura);
 $daoPalabraAsignatura->createAlternativo($idPalabraMasReciente, $idAsigntaura);
 
 
-
-
-header("location: ../View/index_palabras.php.php");
+header("location: ../View/index_palabras.php");
