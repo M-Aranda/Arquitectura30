@@ -101,6 +101,7 @@
                 $idDeAsigPalabras = min($arrayDeIdsDeAsignaturasInscritas);
                 if (isset($_SESSION["idAsigAVer"])) {
                     $idDeAsigPalabras = $_SESSION["idAsigAVer"];
+                    unset( $_SESSION["idAsigAVer"]);
                 }
 
 
@@ -115,7 +116,15 @@
                     <tr>
 
                         <td><?php echo $p->getId(); ?> </td>
-                        <td><?php echo $p->getNombre(); ?> </td>
+                        <td><?php echo $p->getNombre(); ?>
+            <br>
+            <form name="formEliminarPalabras" method="post" action="../Controller/EliminarPalabra.php">
+                <input type="hidden" name="idPalabra" value="<?php echo $p->getId(); ?>">
+                <input type="hidden" name="idAsigPalabra" value="<?php echo $idDeAsigPalabras;?>">
+                <input type="submit" value="Eliminar palabra">
+            </form>
+                        
+                        </td>
                         <td><button class="btn btn-info" onclick="agregarSignificado(<?php echo $p->getId(); ?>, <?php echo $idDeAsigPalabras; ?>)">Agregar significado</button> </td>
                         <td><?php $significados = $ds->buscarSignificadosAsociadoAIdDePalabra($p->getId());
                     ?>
@@ -177,7 +186,9 @@
     </div>
     <div class="form-group col-md-6">
       <label for="idUsuario">Sigla</label>
-      <input type="text" class="form-control" name="idUsuario" value="<?php echo $u->getId();?>">
+      <br>
+      <input type="text" name="txtSigla" placeholder="Sigla: ">
+      <input type="hidden" class="form-control" name="idUsuario" value="<?php echo $u->getId();?>">
     </div>
     </div>  
     <div class="form-group col-md-4">
@@ -192,10 +203,16 @@
     </div>
     <div class="ubicacion">
         <input type="submit" value="Registrar" class="btn btn-primary">
+        </form>
+        
         <a href="Ficha_Personal.php" class="btn btn-warning">Atrás</a>
+        <br>
+        <br>
+        <a href="../Controller/CerrarSesion.php" class="btn btn-warning">Cerrar sesión</a>
+        
     </div>
   </div>
-</form>
+
 
 
 

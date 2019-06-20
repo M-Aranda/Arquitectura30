@@ -53,15 +53,27 @@ foreach($listAlumnos as $alumno){
                                                         . "<th scope='col'>#</th>"
                                                         . "<th scope='col'>Descripción</th>"
                                                         . "<th scope='col'>Recomendar</th>"
+                                               . "<th scope='col'>Ya recomendada?</th>"
                                                     . "</tr>"
                                                    . "</thead>"
                                                    . "<tbody>";
+                                       $contador=1;
                                                         foreach ($listSignificados as $significado) {
                                                             echo 
                                                             "<tr>"
-                                                                . "<td>"
-                                                                . "</td>"
-                                                          . "</tr>";
+                                                                . "<td>".$contador
+                                                                . "</td>"."<td>".$significado->getDescripcion()."</td>".""
+                                                                    . "<td> <form name='recomendar_form' method='post' action='../Controller/RecomendarSig.php'  " 
+                                                                    . "'><input type='hidden' name='idSig' value='".$significado->getId()."'><input type='submit' value="
+                                                                    . "'Recomendar'></form>  </td>"
+                                                                    . "<td>";if($significado->getDefinicionRecomendada()==1){
+                                                                        echo "Sí";
+                                                                    }else{
+                                                                        echo "No";
+                                                                    }
+                                                                   "</td>"; 
+                                                             "</tr>";
+                                                            $contador++;
                                                         }
                                                    echo "</tbody>"
                                                 . "</table>"
@@ -72,9 +84,15 @@ foreach($listAlumnos as $alumno){
                         . "</table>"
                     . "</div>"
                     . "<div class='modal-footer'>"
-                        . "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cerrar</button>"
+                        . ""
+                                    . "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cerrar</button>"
                     . "</div>"
                 . "</div>"
+                                    
             . "</div>"
         . "</div>";
+                            
+  
+                            
+                            
 }

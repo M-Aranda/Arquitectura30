@@ -36,6 +36,17 @@ class DAO_Significado extends Conexion implements DAO {
         $this->c->ejecutar($query);
         $this->c->desconectar();
     }
+    
+        public function deleteSignificadoByFKAsig($fkAsig) {
+        $query = "DELETE FROM Significado WHERE fk_palabra_asignatura_usuario=" . $fkAsig . ";";
+        echo $query;
+        $this->c->conectar();
+        $this->c->ejecutar($query);
+        $this->c->desconectar();
+    }
+    
+    
+    
 
     public function read() {
         $this->c->conectar();
@@ -101,5 +112,27 @@ class DAO_Significado extends Conexion implements DAO {
         $this->c->desconectar();
         return $listado;
     }
+    
+    
+    
+    public function readTodosLosSignificadosDeUnaPalabraEnLaAsignaturaDeUnUsuario($idAsigPalUs) {
+        $this->c->conectar();
+        $query = "SELECT * FROM Significado WHERE fk_palabra_asignatura_usuario=" . $idAsigPalUs . ";";
+        $listado = array();
+        $rs = $this->c->ejecutar($query);
+        while ($reg = $rs->fetch_array()) {
+            $obj = new Significado();
+            $obj->setId($reg[0]);
+            $obj->setDescripcion($reg[1]);
+            $obj->setDefinicionRecomendada($reg[2]);
+            $dap = new DAO_Palabra_Asignatura();
+            $obj->setPalabra_asignatura($dap->findById($reg[3]));
+
+            $listado[] = $obj;
+        }
+        $this->c->desconectar();
+        return $listado;
+    }
+    
 
 }

@@ -16,6 +16,9 @@ if ($_SESSION["usuarioIniciado"] != null) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Ficha personal</title>
+        <script src="../Js/jQuery.js" ></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -27,7 +30,7 @@ if ($_SESSION["usuarioIniciado"] != null) {
         <div class="container-fluid header">
             <header>
                 <?php
-                echo $_SESSION["nombre"];
+                echo "Hola " . $_SESSION["nombre"];
                 ?>
             </header>
         </div>
@@ -83,6 +86,7 @@ if ($_SESSION["usuarioIniciado"] != null) {
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">INFORMACION PERSONAL</h3>
+                    <a href="../Controller/CerrarSesion.php">Cerrar sesión</a>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -143,7 +147,7 @@ if ($_SESSION["usuarioIniciado"] != null) {
 
 
                 <div class="panel-heading">
-                    <h3 class="panel-title">CAMBIO CONTRASEÑA</h3>
+                    <h3 class="panel-title">CAMBIO DE CONTRASEÑA</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -170,13 +174,14 @@ if ($_SESSION["usuarioIniciado"] != null) {
                                         <td>
                                             <form action="../Controller/Controller_Actualizar_Clave.php" method="post">
                                                 <input id="clave_nueva" name="clave_nueva" type="password" maxlength="16" required>
+                                                <input type="hidden" name="idUsuario" value="<?php echo $u->getId(); ?>">
                                                 </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Confirmar Nueva Contraseña:</td>
                                                     <td>
                                                         <input id="clave_verificada" name="clave_verificada" type="password" maxlength="16" required>
-                                                        <br><br><input type="submit" class="btn btn-info" value="Cambiar Contraseña">
+                                                        <br><br><input  type="submit" class="btn btn-info" value="Cambiar Contraseña">
                                             </form>
                                         </td>
                                     </tr>
@@ -198,6 +203,12 @@ if ($_SESSION["usuarioIniciado"] != null) {
 <!--<footer>Ingenieria en Informatica © 2019</footer>-->
 
 <script type="text/javascript" src="../js/eventos.js"></script>
+
+<script>
+
+                  
+
+</script>
 
 
 </body>

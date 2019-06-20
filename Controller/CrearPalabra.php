@@ -49,4 +49,4 @@ echo "Creando palabra ".$nombre.". Asignando palabra".$nombre." a "
         . " asignatura ".$palabraDeAsignatura->getAsignatura()->getNombre()."";
 
 
-//header("location: ../View/index_palabras.php");
+header("location: ../View/index_palabras.php");

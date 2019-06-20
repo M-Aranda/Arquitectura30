@@ -13,15 +13,14 @@ $idPal=$_REQUEST["idPalabra"];
 $idAsigPal=$_REQUEST["idAsigPalabra"];
 
 
-
 $dpa= new DAO_Palabra_Asignatura();
 $ds= new DAO_Significado();
 $de= new DAO_Ejemplo();
 
 
-
 $asigPalUsuario=$dpa->findById($idAsigPal);
 $listadoDeSignificados=$ds->readTodosLosSignificadosDeUnaPalabraEnLaAsignaturaDeUnUsuario($asigPalUsuario->getId());
+
 
 foreach ($listadoDeSignificados as $sig) {
     $de->deleteTodosLosEjemplosDeUnSignificado($sig->getId());
