@@ -44,8 +44,8 @@
                 </div>
                 <div class="form-group">
                     <label for="alumnos">Alumnos:</label>
-                    <table class="table table-bordered">
-                        <thead>
+                    <table class="table">
+<thead class="thead-dark">
                             <tr>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Palabras</th>

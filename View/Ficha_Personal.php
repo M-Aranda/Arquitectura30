@@ -129,11 +129,11 @@ if ($_SESSION["usuarioIniciado"] != null) {
                     </div>
                 </div>
                 <?php if ($u->getEsProfesor() == 1) { ?>
-                    <button onclick="window.location.href = 'menu_profesor.php'">Evaluar palabras de estudiantes</button>
+                    <button class="btn btn-dark" onclick="window.location.href = 'menu_profesor.php'">Evaluar palabras de estudiantes</button>
                     <?php
                 } else {
                     ?>              
-                    <button onclick="window.location.href = 'index_palabras.php'">Administrar palabras</button>
+                    <button class="btn btn-dark" onclick="window.location.href = 'index_palabras.php'">Administrar palabras</button>
                     <?php
                 }
                 ?>
@@ -176,7 +176,7 @@ if ($_SESSION["usuarioIniciado"] != null) {
                                                     <td>Confirmar Nueva Contraseña:</td>
                                                     <td>
                                                         <input id="clave_verificada" name="clave_verificada" type="password" maxlength="16" required>
-                                                        <br><br><input type="submit" class="btn btn-default" value="Cambiar Contraseña">
+                                                        <br><br><input type="submit" class="btn btn-info" value="Cambiar Contraseña">
                                             </form>
                                         </td>
                                     </tr>

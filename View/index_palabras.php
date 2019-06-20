@@ -3,15 +3,34 @@
     <head>
         <meta charset="UTF-8">
         <title>Administrador de palabras</title>
-
-
-
         <script src="../Js/jQuery.js" ></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            table{
+  
+            }
+            .ubicacion{
+                padding-left:35%;
+            }
+            h4{
+                color: white;
+            }
+            .posicioncombox{
+                width:77%;
+            }
 
+            .posicion2{
+                position:absolute;
+                left:37%;
+            }
+        </style>
     </head>
     <body>
+    
+    <nav class="navbar navbar-dark bg-dark">
+
         <?php
         require_once("../Model/DAO/DAO_Palabra.php");
         require_once("../Model/DAO/DAO_Significado.php");
@@ -36,37 +55,30 @@
             header("location: errorSinAsignaturas.php");
         }
 
-
-        echo "Asignaturas inscritas:";
+        echo "<h4>Asignaturas inscritas:</h4>";
         ?>
+        <div class="posicioncombox">
+            <form name="cboAsignaturaAVer" method="POST" action="../Controller/CargarPalabrasDeAsignatura.php">
+                <select name="opcionSele">
+                    <?php foreach ($asignaturasInscritas as $ai) { ?>
+                        <option class="btn btn-danger" value="<?php echo $ai->getAsignatura()->getId(); ?> "><?php echo $ai->getAsignatura()->getNombre(); ?></option>
+                    <?php }
+                    ?>
+                </select>
+        </div>
+                <input class="btn btn-primary posicion2" type="submit" value="Ver palabras">
+            </form>
+        
+        </nav>
+        <div class="container">
 
-        <form name="cboAsignaturaAVer" method="POST" action="../Controller/CargarPalabrasDeAsignatura.php">
-            <select name="opcionSele">
-                <?php foreach ($asignaturasInscritas as $ai) { ?>
-                    <option value="<?php echo $ai->getAsignatura()->getId(); ?> "><?php echo $ai->getAsignatura()->getNombre(); ?></option>
-                <?php }
-                ?>
-            </select>
-            <br>
-            <input type="submit" value="Ver palabras">
-        </form>
-
-
-
-        <br>
-        <br>
-
-        <br>
-        <br>
         <?php
-        echo "Palabras registradas en esta asignatura:";
-        echo "<br>";
-        echo "<br>";
+        echo "<h3>Palabras registradas en esta asignatura:</h4>";
         ?>
 
-
-        <table  border="1">
-            <thead>
+<div class="table-responsive tabla">
+<table class="table">
+<thead class="thead-dark">
                 <tr>
                     <th>Palabra #</th>
                     <th>Palabra</th>
@@ -104,7 +116,7 @@
 
                         <td><?php echo $p->getId(); ?> </td>
                         <td><?php echo $p->getNombre(); ?> </td>
-                        <td><button onclick="agregarSignificado(<?php echo $p->getId(); ?>, <?php echo $idDeAsigPalabras; ?>)">Agregar significado</button> </td>
+                        <td><button class="btn btn-info" onclick="agregarSignificado(<?php echo $p->getId(); ?>, <?php echo $idDeAsigPalabras; ?>)">Agregar significado</button> </td>
                         <td><?php $significados = $ds->buscarSignificadosAsociadoAIdDePalabra($p->getId());
                     ?>
 
@@ -134,8 +146,8 @@
                                                     echo "No";
                                                 }
                                                 ?></td>
-                                            <td><button onclick="agregarEjemplo(<?php echo $s->getId();?>)">Agregar ejemplo</button></td>
-                                            <td>  <button onclick="mostrarEjemplos(<?php echo $s->getId(); ?>,<?php echo $p->getId(); ?>)" >Ver ejemplos</button> </td>
+                                            <td><button class="btn btn-primary" onclick="agregarEjemplo(<?php echo $s->getId();?>)">Agregar ejemplo</button></td>
+                                            <td>  <button class="btn btn-dark" onclick="mostrarEjemplos(<?php echo $s->getId(); ?>,<?php echo $p->getId(); ?>)" >Ver ejemplos</button> </td>
                                         </tr>
 
                                         <?php
@@ -156,32 +168,38 @@
 
             </tbody>
         </table>
-
-
-
-
-
-        <form name="registrar_nueva_palabra" method="POST" action="../Controller/CrearPalabra.php">
-            <br>
-            Palabra: <input type="text" name="txtNombre" placeholder="Palabra:" required>
-            <br>
-            Sigla: <input type="text" name="txtSigla" placeholder="Sigla:">
-            <input type="hidden" name="idUsuario" value="<?php echo $u->getId();?>">
-            <br>
-            Asignatura de la palabra:      
-            <select name="cboAsignatura">
-                <?php foreach ($asignaturasInscritas as $ai) { ?>
-                    <option value="<?php echo $ai->getAsignatura()->getId(); ?>"><?php echo $ai->getAsignatura()->getNombre(); ?></option>
-                <?php }
-                ?>
+            </div>
+            <form name="registrar_nueva_palabra" method="POST" action="../Controller/CrearPalabra.php">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="txtNombre">Palabra</label>
+      <input type="text" class="form-control" name="txtNombre" placeholder="Palabra:" required>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="idUsuario">Sigla</label>
+      <input type="text" class="form-control" name="idUsuario" value="<?php echo $u->getId();?>">
+    </div>
+    </div>  
+    <div class="form-group col-md-4">
+        <label for="inputState">Asignatura de la palabra: </label>
+        <select name="cboAsignatura" id="input" class="form-control">
+            <?php foreach ($asignaturasInscritas as $ai) { ?>
+                <option value="<?php echo $ai->getAsignatura()->getId(); ?>"><?php echo $ai->getAsignatura()->getNombre(); ?></option>
+            <?php }
+            ?>
             </select>
-            <br>
-            <br>
-            <input type="submit" value="Registrar">
-        </form>
-        <br>
-        <br>
-        <a href="Ficha_Personal.php">Atrás</a>
+        </select>
+    </div>
+    <div class="ubicacion">
+        <input type="submit" value="Registrar" class="btn btn-primary">
+        <a href="Ficha_Personal.php" class="btn btn-warning">Atrás</a>
+    </div>
+  </div>
+</form>
+
+
+
+       
 
 
 
@@ -198,7 +216,7 @@
             Swal.fire({
                 type: 'info',
                 title: 'Agregando significado ',
-                html: '<form name="agergarSignificado" action="../Controller/AgregarSignificado.php"> <input name="idAsig" type="hidden" value="' + idAsigUs + '"> <input name="idDePalabra" type="hidden" value="' + idPalabra + '"> <input name="significadoAAgregar" type="text" placeholder="significado:"> <input type="submit" value="Guardar"> </form>',
+                html: '<form name="agergarSignificado" action="../Controller/AgregarSignificado.php"> <input name="idAsig" type="hidden" value="' + idAsigUs + '"> <input name="idDePalabra" type="hidden" value="' + idPalabra + '"> <input name="significadoAAgregar" type="text" placeholder="significado:"> <input class="btn btn-info" type="submit" value="Guardar"> </form>',
                 showCancelButton: true,
                 showConfirmButton: false,
                 cancelButtonText: 'Cancelar',
@@ -214,7 +232,7 @@
             Swal.fire({
                 type: 'info',
                 title: 'Agregando ejemplo ',
-                html: '<form name="agergarEjemplo" action="../Controller/CrearEjemplo.php"> <input name="idSig" type="hidden" value="' + idSignificado + '"> <input name="txtEjemplo" type="text" placeholder="Ejemplo:"> <input type="submit" value="Guardar"> </form>',
+                html: '<form name="agergarEjemplo" action="../Controller/CrearEjemplo.php"> <input name="idSig" type="hidden" value="' + idSignificado + '"> <input name="txtEjemplo" type="text" placeholder="Ejemplo:"> <input class="btn btn-info" type="submit" value="Guardar"> </form>',
                 showCancelButton: true,
                 showConfirmButton: false,
                 cancelButtonText: 'Cancelar',
