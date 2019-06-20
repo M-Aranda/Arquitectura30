@@ -1,3 +1,4 @@
+drop database if exists bd_parvulo;
 CREATE DATABASE bd_parvulo;
 /* DROP DATABASE bd_parvulo; */
 USE bd_parvulo;
@@ -6,8 +7,6 @@ CREATE TABLE anio_ingreso(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     anio INT
 );
-
-
 
 CREATE TABLE Usuario(
 id INT AUTO_INCREMENT,
@@ -79,7 +78,11 @@ INSERT INTO Usuario VALUES(NULL,'Lena',0,'123','sami','sam@hotmail.com');
 INSERT INTO Usuario VALUES(NULL,'Samantha',1,'333','aaa','sam@hotmail.com');
 INSERT INTO Usuario VALUES(NULL,'Alumnos sin asignaturas',0,'111','qqq','sam@hotmail.com');
 
+INSERT INTO anio_ingreso VALUES(NULL, 2015);
+INSERT INTO anio_ingreso VALUES(NULL, 2016);
 INSERT INTO anio_ingreso VALUES(NULL, 2017);
+INSERT INTO anio_ingreso VALUES(NULL, 2018);
+INSERT INTO anio_ingreso VALUES(NULL, 2019);
 
 INSERT INTO anio_usuario VALUES(NULL, 1, 1);
 INSERT INTO anio_usuario VALUES(NULL, 1, 3);

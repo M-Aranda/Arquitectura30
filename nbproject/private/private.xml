@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Arquitectura30/Model/DAO/DAO_Asignatura.php</file>
-            <file>file:/C:/xampp/htdocs/Arquitectura30/Model/DAO/DAO_Palabra_Asignatura.php</file>
-            <file>file:/C:/xampp/htdocs/Arquitectura30/View/index_palabras.php</file>
-            <file>file:/C:/xampp/htdocs/Arquitectura30/Controller/CrearPalabra.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/Model/DAO/DAO_Anio_Usuario.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/Controller/CrearUsuario.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/Model/anio_ingreso.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/Model/anio_usuario.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/Model/DAO/DAO_anio_ingreso.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/View/registro.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/Model/Asignatura_Usuario.php</file>
         </group>
     </open-files>
 </project-private>

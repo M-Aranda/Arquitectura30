@@ -44,6 +44,11 @@
                     <label for="password">Contraseña:</label>
                     <input type="password" class="form-control" id="password" name="password" autocomplete="off" required>
                 </div>
+                
+                <div class="form-group">
+                    <label for="password">Año Ingreso:</label>
+                    <input type="number" class="form-control" id="anioIngreso" name="anioIngreso" min="2015" max="2019" value="2015" required>
+                </div>
 
                 <medium id="emailHelp" class="form-text text-muted"> <a href="../index.php">Regresar</a> </medium>
                 <br>
