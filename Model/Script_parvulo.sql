@@ -75,7 +75,7 @@ PRIMARY KEY(id)
 
 INSERT INTO Usuario VALUES(NULL,'Carla',0,'1','123','ccar@hotmail.com');
 INSERT INTO Usuario VALUES(NULL,'Francisca',0,'12','pass','fran@hotmail.com');
-INSERT INTO Usuario VALUES(NULL,'Samantha',0,'123','sami','sam@hotmail.com');
+INSERT INTO Usuario VALUES(NULL,'Lena',0,'123','sami','sam@hotmail.com');
 INSERT INTO Usuario VALUES(NULL,'Samantha',1,'333','aaa','sam@hotmail.com');
 INSERT INTO Usuario VALUES(NULL,'Alumnos sin asignaturas',0,'111','qqq','sam@hotmail.com');
 
@@ -104,9 +104,6 @@ INSERT INTO Asignatura_Usuario VALUES(NULL, '3', '4');
 INSERT INTO Palabra VALUES(NULL,'Xilófono','XLFN');
 INSERT INTO Palabra VALUES(NULL,'Compás','CMPS');
 INSERT INTO Palabra VALUES(NULL,'Tambor','TMBR');
-
-
-
 
 
 INSERT INTO Palabra_Asignatura_Usuario VALUES(NULL, '1', '1');
@@ -164,17 +161,12 @@ SELECT * FROM Ejemplo;
 */
 
 
-
-
 /*
 Para borrar palabras
 DELETE FROM Ejemplo WHERE fk_significado=1; 
 DELETE FROM Significado WHERE fk_palabra_asignatura_usuario=1;
 DELETE FROM Palabra_Asignatura_Usuario WHERE id=1;
 */
-
-
-
 
 /*
 DROP DATABASE bd_parvulo;
