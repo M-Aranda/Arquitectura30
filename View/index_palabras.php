@@ -160,11 +160,13 @@
 
 
 
+
         <form name="registrar_nueva_palabra" method="POST" action="../Controller/CrearPalabra.php">
             <br>
             Palabra: <input type="text" name="txtNombre" placeholder="Palabra:" required>
             <br>
             Sigla: <input type="text" name="txtSigla" placeholder="Sigla:">
+            <input type="hidden" name="idUsuario" value="<?php echo $u->getId();?>">
             <br>
             Asignatura de la palabra:      
             <select name="cboAsignatura">

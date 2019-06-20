@@ -7,6 +7,8 @@ CREATE TABLE anio_ingreso(
     anio INT
 );
 
+
+
 CREATE TABLE Usuario(
 id INT AUTO_INCREMENT,
 nombre VARCHAR (100),
@@ -36,6 +38,8 @@ fk_usuario INT REFERENCES Usuario (id),
 fk_asignatura INT REFERENCES Asignatura (id)
 );
 
+
+
 CREATE TABLE Palabra(
 id INT AUTO_INCREMENT,
 nombre VARCHAR (100),
@@ -48,6 +52,8 @@ id INT AUTO_INCREMENT PRIMARY KEY,
 fk_palabra INT REFERENCES Palabra (id),
 fk_asignatura_usuario INT REFERENCES Asignatura_Usuario (id)
 );
+
+
 
 CREATE TABLE Significado(
 id INT AUTO_INCREMENT,
@@ -99,6 +105,7 @@ INSERT INTO Palabra VALUES(NULL,'Xilófono','XLFN');
 INSERT INTO Palabra VALUES(NULL,'Compás','CMPS');
 INSERT INTO Palabra VALUES(NULL,'Tambor','TMBR');
 
+
 INSERT INTO Palabra_Asignatura_Usuario VALUES(NULL, '1', '1');
 INSERT INTO Palabra_Asignatura_Usuario VALUES(NULL, '2', '1');
 INSERT INTO Palabra_Asignatura_Usuario VALUES(NULL, '3', '1');
@@ -130,12 +137,13 @@ CREATE PROCEDURE return_usuario_by_ingreso_and_asignatura(id_anio INT, id_asigna
             Asignatura_Usuario.fk_asignatura = id_asignatura;
 	END //
 DELIMITER ;
-/* DROP PROCEDURE return_usuario_by_ingreso_and_asignatura; */
+DROP PROCEDURE return_usuario_by_ingreso_and_asignatura;
 
 /*
-SELECT palabra.id, palabra.nombre, palabra.sigla FROM Palabra, Asignatura_Usuario, Palabra_Asignatura_Usuario
+SELECT palabra.id, palabra.nombre, palabra.sigla FROM Usuario, Palabra, Asignatura_Usuario, Palabra_Asignatura_Usuario
 WHERE Asignatura_Usuario.fk_usuario =1 AND Palabra_Asignatura_Usuario.fk_asignatura_usuario=1 AND Palabra.id=Palabra_Asignatura_Usuario.fk_palabra AND
 Palabra_Asignatura_Usuario.fk_asignatura_usuario=Asignatura_Usuario.id;
+
 
 
 SELECT * FROM Significado WHERE fk_palabra_asignatura_usuario=1;
@@ -158,6 +166,14 @@ SELECT Palabra_Asignatura_Usuario.id FROM Palabra,Palabra_Asignatura_Usuario , A
 Asignatura_Usuario.fk_asignatura=Asignatura.id AND Palabra.id=Palabra_Asignatura_Usuario.fk_palabra AND Asignatura_Usuario.id=Palabra_Asignatura_Usuario.fk_asignatura_usuario
 AND Palabra.id=1 AND Asignatura.id=1;*/
 
+/*
+Para borrar palabras
+
+DELETE FROM Ejemplo WHERE fk_significado=1; 
+DELETE FROM Significado WHERE fk_palabra_asignatura_usuario=1;
+DELETE FROM Palabra_Asignatura_Usuario WHERE id=1;
+
+*/
 
 
 /*

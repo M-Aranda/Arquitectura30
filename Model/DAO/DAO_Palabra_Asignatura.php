@@ -37,6 +37,7 @@ class DAO_Palabra_Asignatura extends Conexion implements DAO {
     public function createAlternativo($idPal, $idAsig) {
 
         $query = "INSERT INTO Palabra_Asignatura_Usuario VALUES (NULL, " . $idPal . ", " . $idAsig . " );";
+        echo $query;
         $this->c->conectar();
         $this->c->ejecutar($query);
         $this->c->desconectar();
