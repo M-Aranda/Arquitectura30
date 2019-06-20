@@ -118,9 +118,10 @@
                         <td><?php echo $p->getId(); ?> </td>
                         <td><?php echo $p->getNombre(); ?>
             <br>
+            <br>
             <form name="formEliminarPalabras" method="post" action="../Controller/EliminarPalabra.php">
                 <input type="hidden" name="idPalabra" value="<?php echo $p->getId(); ?>">
-                <input type="hidden" name="idAsigPalabra" value="<?php echo $idDeAsigPalabras;?>">
+                <input type="hidden" name="idAsigPalabra" value="<?php echo $p->getId();?>">
                 <input type="submit" value="Eliminar palabra">
             </form>
                         

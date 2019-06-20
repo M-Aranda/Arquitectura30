@@ -17,7 +17,7 @@ $dpa= new DAO_Palabra_Asignatura();
 $ds= new DAO_Significado();
 $de= new DAO_Ejemplo();
 
-
+echo $idAsigPal;
 $asigPalUsuario=$dpa->findById($idAsigPal);
 $listadoDeSignificados=$ds->readTodosLosSignificadosDeUnaPalabraEnLaAsignaturaDeUnUsuario($asigPalUsuario->getId());
 

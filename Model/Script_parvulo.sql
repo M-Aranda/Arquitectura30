@@ -163,10 +163,8 @@ SELECT * FROM Significado;
 SELECT * FROM Ejemplo;
 */
 
-/*
-SELECT Palabra_Asignatura_Usuario.id FROM Palabra,Palabra_Asignatura_Usuario , Asignatura_Usuario, Usuario, Asignatura WHERE Usuario.id=Asignatura_Usuario.fk_usuario AND
-Asignatura_Usuario.fk_asignatura=Asignatura.id AND Palabra.id=Palabra_Asignatura_Usuario.fk_palabra AND Asignatura_Usuario.id=Palabra_Asignatura_Usuario.fk_asignatura_usuario
-AND Palabra.id=1 AND Asignatura.id=1;*/
+
+
 
 /*
 Para borrar palabras
@@ -174,14 +172,9 @@ DELETE FROM Ejemplo WHERE fk_significado=1;
 DELETE FROM Significado WHERE fk_palabra_asignatura_usuario=1;
 DELETE FROM Palabra_Asignatura_Usuario WHERE id=1;
 */
-/*
 
-Si esta la palabra
-SELECT palabra.id, palabra.nombre, palabra.sigla FROM Palabra, Asignatura_Usuario, Palabra_Asignatura_Usuario
-        WHERE Asignatura_Usuario.fk_usuario =2 AND Palabra_Asignatura_Usuario.fk_asignatura_usuario= 4
-        AND Palabra.id=Palabra_Asignatura_Usuario.fk_palabra AND
-         Palabra_Asignatura_Usuario.fk_asignatura_usuario=Asignatura_Usuario.id;
-         */
+
+
 
 /*
 DROP DATABASE bd_parvulo;
