@@ -28,8 +28,8 @@ foreach($listAlumnos as $alumno){
                         . "</button>"
                     . "</div>"
                     . "<div class='modal-body'>"
-                        . "<table class='table table-bordered'"
-                            . "<thead>"
+                        . "<table class='table' border='1'>"
+                            . "<thead class='thead-dark'>"
                                 . "<tr>"
                                     . "<th scope='col'>#</th>"
                                     . "<th scope='col'>Palabra</th>"
@@ -47,7 +47,7 @@ foreach($listAlumnos as $alumno){
                                             . "<th scope='row'>$idPalabra</th>"
                                             . "<td>$palabraActual</td>"
                                             . "<td>"
-                                                . "<table class='table table-bordered'>"
+                                                . "<table class='table'>"
                                                    . "<thead>"
                                                     . "<tr>"
                                                         . "<th scope='col'>#</th>"
@@ -64,7 +64,7 @@ foreach($listAlumnos as $alumno){
                                                                 . "<td>".$contador
                                                                 . "</td>"."<td>".$significado->getDescripcion()."</td>".""
                                                                     . "<td> <form name='recomendar_form' method='post' action='../Controller/RecomendarSig.php'  " 
-                                                                    . "'><input type='hidden' name='idSig' value='".$significado->getId()."'><input type='submit' value="
+                                                                    . "'><input type='hidden' name='idSig' value='".$significado->getId()."'><input class='btn btn-primary' type='submit' value="
                                                                     . "'Recomendar'></form>  </td>"
                                                                     . "<td>";if($significado->getDefinicionRecomendada()==1){
                                                                         echo "Sí";
@@ -85,7 +85,7 @@ foreach($listAlumnos as $alumno){
                     . "</div>"
                     . "<div class='modal-footer'>"
                         . ""
-                                    . "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cerrar</button>"
+                                    . "<button type='button' class='btn btn-outline-primary' data-dismiss='modal'>Cerrar</button>"
                     . "</div>"
                 . "</div>"
                                     

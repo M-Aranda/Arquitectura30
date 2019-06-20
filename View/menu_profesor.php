@@ -12,7 +12,6 @@
         <script src="../Js/js_profesor.js"></script>
         <link rel="stylesheet" type="text/css" href="../Css/estilo_home.css">
         <link rel="stylesheet" type="text/css" href="../Css/estilo_ficha.css">
-
         <style>
             .modal {
                 text-align: center;
@@ -24,6 +23,10 @@
                 width: auto !important;
                 display: inline-block;
             }
+            body{
+                background-color: gray;
+            }
+
         </style>
     </head>
 

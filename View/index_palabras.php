@@ -8,11 +8,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
-            table{
-
-            }
             .ubicacion{
-                padding-left:35%;
+                position: absolute;
+                padding-left: 25%;
+                bottom: -64%;
             }
             h4{
                 color: white;
@@ -24,6 +23,10 @@
             .posicion2{
                 position:absolute;
                 left:37%;
+            }
+            .ubicar-modi{
+                position: absolute;
+                
             }
         </style>
     </head>
@@ -119,17 +122,18 @@
                                 <td><?php echo $p->getNombre(); ?>
                                     <br>
                                     <br>
-                                    <form name="formEliminarPalabra" method="post" action="../Controller/EliminarPalabra.php">
-                                        <input type="hidden" name="idPalabra" value="<?php echo $p->getId(); ?>">
-                                        <input type="hidden" name="idAsigPalabra" value="<?php echo $p->getId(); ?>">
-                                        <input type="submit" value="Eliminar palabra">
-                                    </form>
-                                    <br>
-                                    <br>
-                                    <button class="btn btn-primary" onclick="modificarPalabra(<?php echo $p->getId(); ?>)">Modificar</button>
-                                    <br>
-                                    <br>
-
+                                    
+                                        <form name="formEliminarPalabra" method="post" action="../Controller/EliminarPalabra.php">
+                                            <input type="hidden" name="idPalabra" value="<?php echo $p->getId(); ?>">
+                                            <input type="hidden" name="idAsigPalabra" value="<?php echo $p->getId(); ?>">
+                                            <input type="submit" value="Eliminar palabra" class="btn btn-danger">
+                                        </form>
+                                        <br>
+                                        <br>
+                                        <button class="btn btn-warning ubicar-modi" onclick="modificarPalabra(<?php echo $p->getId(); ?>)">Modificar</button>
+                                        <br>
+                                        <br>
+                                    
                                 </td>
                                 <td><button class="btn btn-info" onclick="agregarSignificado(<?php echo $p->getId(); ?>, <?php echo $idDeAsigPalabras; ?>)">Agregar significado</button> </td>
                                 <td><?php $significados = $ds->buscarSignificadosAsociadoAIdDePalabra($p->getId());
@@ -154,9 +158,9 @@
                                                 <tr>
                                                     <td><?php echo $contador; ?></td>
                                                     <td> <?php echo $s->getDescripcion(); ?>
-                                                    <br>
-                                                    <br>
-                                                    <button class="btn btn-primary" onclick="modificarSignificado(<?php echo $s->getId();?>)">Modificar significado </button>
+                                                        <br>
+                                                        <br>
+                                                        <button class="btn btn-primary" onclick="modificarSignificado(<?php echo $s->getId(); ?>)">Modificar significado </button>
                                                     </td>
                                                     <td> <?php
                                                         if ($s->getDefinicionRecomendada() == true) {
@@ -218,7 +222,7 @@
                     <a href="Ficha_Personal.php" class="btn btn-warning">Atrás</a>
                     <br>
                     <br>
-                    <a href="../Controller/CerrarSesion.php" class="btn btn-warning">Cerrar sesión</a>
+                    <a href="../Controller/CerrarSesion.php" class="btn btn-secondary">Cerrar sesión</a>
 
                 </div>
         </div>
