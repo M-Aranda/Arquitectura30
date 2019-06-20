@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Arquitectura30/Controller/FetchAlumnos.php</file>
-            <file>file:/C:/xampp/htdocs/Arquitectura30/Model/DAO/DAO_Usuario.php</file>
             <file>file:/C:/xampp/htdocs/Arquitectura30/Js/js_profesor.js</file>
-            <file>file:/C:/xampp/htdocs/Arquitectura30/View/index_palabras.php</file>
-            <file>file:/C:/xampp/htdocs/Arquitectura30/Controller/CargarPalabrasDeAsignatura.php</file>
-            <file>file:/C:/xampp/htdocs/Arquitectura30/View/Ficha_Personal.php</file>
-            <file>file:/C:/xampp/htdocs/Arquitectura30/Js/eventos.js</file>
-            <file>file:/C:/xampp/htdocs/Arquitectura30/Controller/CheckLogin.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/Model/anio_ingreso.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/Model/DAO/DAO_Palabra.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/Model/DAO/DAO_anio_ingreso.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/Controller/FetchAnioIngreso.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/Model/Asignatura.php</file>
+            <file>file:/C:/xampp/htdocs/Arquitectura30/Controller/FetchAsignatura.php</file>
             <file>file:/C:/xampp/htdocs/Arquitectura30/View/menu_profesor.php</file>
         </group>
     </open-files>

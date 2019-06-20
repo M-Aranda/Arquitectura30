@@ -130,7 +130,7 @@ CREATE PROCEDURE return_usuario_by_ingreso_and_asignatura(id_anio INT, id_asigna
             Asignatura_Usuario.fk_asignatura = id_asignatura;
 	END //
 DELIMITER ;
-DROP PROCEDURE return_usuario_by_ingreso_and_asignatura;
+/* DROP PROCEDURE return_usuario_by_ingreso_and_asignatura; */
 
 /*
 SELECT palabra.id, palabra.nombre, palabra.sigla FROM Palabra, Asignatura_Usuario, Palabra_Asignatura_Usuario

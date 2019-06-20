@@ -13,7 +13,18 @@ $(document).ready(function () {
         }).done(function (res) {
             $("#tbodyAlumnos").html(res);
         });
-    }
+
+        $.ajax({
+            type: "POST",
+            url: '../Controller/ModalProfesor.php',
+            data: {
+                id_ingreso: anioIngreso,
+                id_asignatura: asignatura
+            }
+        }).done(function (res) {
+            $("#divModal").html(res);
+        });
+    };
 
     var fillCboAnioIngreso = function () {
         $.ajax({
@@ -22,8 +33,8 @@ $(document).ready(function () {
         }).done(function (res) {
             $("#cboAnioIngreso").html(res);
         });
-    }
-    
+    };
+
     var fillCboAsignatura = function () {
         $.ajax({
             type: "POST",
@@ -31,20 +42,20 @@ $(document).ready(function () {
         }).done(function (res) {
             $("#cboAsignatura").html(res);
         });
-    }
-    
+    };
+
     var cboAnioChange = function () {
         $("#cboAnioIngreso").change(function () {
             fillTable();
         });
-    }
-    
+    };
+
     var cboAsignaturaChange = function () {
         $("#cboAsignatura").change(function () {
             fillTable();
         });
-    }
-    
+    };
+
     fillTable();
     fillCboAnioIngreso();
     cboAnioChange();
