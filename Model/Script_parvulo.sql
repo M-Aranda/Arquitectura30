@@ -137,7 +137,32 @@ CREATE PROCEDURE return_usuario_by_ingreso_and_asignatura(id_anio INT, id_asigna
             Asignatura_Usuario.fk_asignatura = id_asignatura;
 	END //
 DELIMITER ;
-DROP PROCEDURE return_usuario_by_ingreso_and_asignatura;
+/* DROP PROCEDURE return_usuario_by_ingreso_and_asignatura; */
+
+DELIMITER //
+CREATE PROCEDURE return_significado_by_user_asignatura_palabra(id_usuario INT, id_asignatura INT, id_palabra INT)
+	BEGIN
+		SELECT
+			Significado.id,
+			Significado.descripcion,
+			Significado.definicionRecomendada
+		FROM
+			Usuario,
+			Asignatura,
+			Asignatura_Usuario,
+			Palabra,
+			Palabra_Asignatura_Usuario,
+			Significado
+		WHERE
+			id_usuario = Asignatura_Usuario.fk_usuario AND
+			id_asignatura = Asignatura_Usuario.fk_asignatura AND
+			id_palabra = Palabra_Asignatura_Usuario.fk_palabra AND
+			Asignatura_Usuario.id = Palabra_Asignatura_Usuario.fk_asignatura_usuario AND
+			Significado.fk_palabra_asignatura_usuario = Palabra_Asignatura_Usuario.id;
+    END //
+DELIMITER ;
+/* DROP PROCEDURE return_significado_by_user; */
+CALL return_significado_by_user_asignatura_palabra(1, 1, 1);
 
 /*
 SELECT palabra.id, palabra.nombre, palabra.sigla FROM Usuario, Palabra, Asignatura_Usuario, Palabra_Asignatura_Usuario
